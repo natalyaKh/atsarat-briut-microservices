@@ -10,7 +10,7 @@
     </parent>
     <groupId>atsarat-briut</groupId>
     <artifactId>atsarat-briut-bom</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>atsarat-briut</name>
     <description>microservices for filling out a permit to visit educational institutions</description>
