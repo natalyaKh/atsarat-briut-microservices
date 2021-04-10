@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/atsarat-briut-microservices.iml" filepath="$PROJECT_DIR$/.idea/atsarat-briut-microservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/utils/utils.iml" filepath="$PROJECT_DIR$/common/utils/utils.iml" />
     </modules>
   </component>
 </project>
