@@ -6,21 +6,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common" />
         <module name="eureka-service" />
+        <module name="common" />
+        <module name="eureka" />
         <module name="utils" />
+      </profile>
+      <profile name="Annotation profile for Unknown" enabled="true">
+        <sourceOutputDir name="../../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wrapper" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="atsarat-briut-microservices" target="1.8" />
       <module name="common" target="11" />
+      <module name="eureka" target="11" />
       <module name="eureka-service" target="11" />
       <module name="utils" target="11" />
+      <module name="wrapper" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
+      <module name="eureka" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
       <module name="utils" options="-parameters" />
     </option>
