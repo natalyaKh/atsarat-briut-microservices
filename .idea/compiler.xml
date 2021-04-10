@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="eureka-service" />
+        <module name="user-service" />
         <module name="common" />
         <module name="utils" />
       </profile>
@@ -13,12 +15,16 @@
     <bytecodeTargetLevel>
       <module name="atsarat-briut-microservices" target="1.8" />
       <module name="common" target="11" />
+      <module name="eureka-service" target="15" />
+      <module name="user-service" target="11" />
       <module name="utils" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
+      <module name="eureka-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
       <module name="utils" options="-parameters" />
     </option>
   </component>
