@@ -5,7 +5,9 @@ import smilyk.atsarat.utils.AppProperties;
 import smilyk.atsarat.utils.SpringApplicationContext;
 
 public class SecurityConstants {
-    public static final String SIGN_UP_URL = "/users/v1";
+
+    public static final String SIGN_UP_URL = "/users/v1/";
+
     public static final String SIGN_UP_ADMIN_URL = "/users/v1/admin";
     public static final String VERIFICATION_EMAIL_URL = "/users/v1/email-verification/**";
     public static final String PASSWORD_RESET_REQUEST_URL = "/users/v1/password-reset-request";
