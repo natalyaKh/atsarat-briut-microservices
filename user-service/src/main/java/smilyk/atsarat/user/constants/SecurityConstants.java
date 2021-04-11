@@ -1,9 +1,13 @@
 package smilyk.atsarat.user.constants;
 
 
-import smilyk.atsarat.utils.AppProperties;
-import smilyk.atsarat.utils.SpringApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+import smilyk.atsarat.user.SpringApplicationContext;
+import smilyk.atsarat.user.security.AppProperties;
 
+
+@Component
 public class SecurityConstants {
 
     public static final String SIGN_UP_URL = "/users/v1/";

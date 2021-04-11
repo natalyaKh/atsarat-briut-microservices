@@ -1,0 +1,14 @@
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/controller/PingController.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/security.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/services/emailServices/EmailServiceImpl.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/services/rabbitService/RabbitServiceImpl.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/dto/RabbitDto.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/controller/EmailController.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/enums/Services.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/dto/EmailVerificationDto.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/services/rabbitService/RabbitService.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/dto/EmailDto.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/config/MailConfig.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/config/RabbitConfig.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/EmailServiceApplication.java
+/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/services/emailServices/EmailService.java

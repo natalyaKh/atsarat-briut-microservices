@@ -6,22 +6,14 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import smilyk.atsarat.user.dto.*;
-
-
-
-
-
 import smilyk.atsarat.user.dto.AddUserDto;
 import smilyk.atsarat.user.dto.OperationStatusModel;
 import smilyk.atsarat.user.dto.Response;
 import smilyk.atsarat.user.dto.UpdateUserDto;
-
-
 import smilyk.atsarat.user.enums.RequestOperationName;
 import smilyk.atsarat.user.enums.RequestOperationStatus;
 import smilyk.atsarat.user.service.users.UserService;
 import smilyk.atsarat.user.service.validator.ValidateUserService;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.lang.reflect.Type;
@@ -63,25 +55,6 @@ public class UserController {
      * @param userDetails
      * @return {@link UpdateUserDto}
      */
-    @PutMapping(path = "/{id}")
-    public Response updateUser(@PathVariable String id, @Valid @RequestBody UpdateUserDto userDetails) {
-        UpdateUserDto updateUser = userService.updateUser(id, userDetails);
-        return new Response(updateUser, HttpServletResponse.SC_OK, currentDate);
-    }
-
-    /**
-     * method returns {@link UserResponseDto} by uuid of user
-     *
-
-     * @param id
-     * @param userDetails
-     * @return {@link UpdateUserDto}
-     */
-    @PutMapping(path = "/{id}")
-    public Response updateUser(@PathVariable String id, @Valid @RequestBody UpdateUserDto userDetails) {
-        UpdateUserDto updateUser = userService.updateUser(id, userDetails);
-        return new Response(updateUser, HttpServletResponse.SC_OK, currentDate);
-    }
 
     /**
      *method update {@link smilyk.atsarat.user.models.Users} in DB

@@ -2,6 +2,7 @@ package smilyk.atsarat.user.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import smilyk.atsarat.user.SpringApplicationContext;
 import smilyk.atsarat.user.constants.BeansConstants;
 import smilyk.atsarat.user.constants.SecurityConstants;
 import io.jsonwebtoken.Jwts;
@@ -15,8 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import smilyk.atsarat.user.dto.UserDto;
 import smilyk.atsarat.user.models.UserLoginRequestModel;
 import smilyk.atsarat.user.service.users.UserService;
-import smilyk.atsarat.utils.SpringApplicationContext;
-import smilyk.atsarat.utils.UserUtils;
+
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;

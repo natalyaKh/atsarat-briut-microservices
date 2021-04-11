@@ -8,36 +8,23 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-
-
-
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import smilyk.atsarat.user.dto.*;
 import smilyk.atsarat.user.enums.ErrorMessages;
 import smilyk.atsarat.user.enums.LoggerMessages;
 import smilyk.atsarat.user.models.Users;
 import smilyk.atsarat.user.repo.UserRepo;
-import smilyk.atsarat.utils.UserUtils;
-import smilyk.atsarat.utils.UuidUtils;
+import smilyk.atsarat.user.utils.UserUtils;
+
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
@@ -49,16 +36,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@ComponentScan("smilyk.atsarat")
 public class UserServiceImpl implements UserService {
 
     private String currentDate = LocalDateTime.now().toLocalDate().toString();
     ModelMapper modelMapper = new ModelMapper();
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    @Autowired
-    UuidUtils uuidUtils;
-    @Autowired
-    UserUtils utils;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
@@ -70,16 +54,18 @@ public class UserServiceImpl implements UserService {
     String emailExchange;
     @Value(("${email.key}"))
     String emailRoutingkey;
+    @Autowired
+    UserUtils utils;
 
 
     @Override
     public Response createUser(AddUserDto userDetails) {
         Users userEntity = modelMapper.map(userDetails, Users.class);
-        userEntity.setUuidUser(uuidUtils.generateUuid().toString());
+        userEntity.setUuidUser(utils.generateUserId().toString());
         userEntity.setConfirmEmailToken(null);
         userEntity.setPassword(bCryptPasswordEncoder.encode(userDetails.getNotDecryptedPassword()));
-        userEntity.setConfirmEmailToken(utils.generateEmailVerificationToken(utils.generateEmailVerificationToken(
-            uuidUtils.generateUuid().toString())));
+        userEntity.setConfirmEmailToken(utils.generateEmailVerificationToken(
+            utils.generateUserId().toString()));
         UserResponseDto userResponseDto = modelMapper.map(userEntity, UserResponseDto.class);
         userRepo.save(userEntity);
         EmailVerificationDto emailDto = EmailVerificationDto.builder()
@@ -105,7 +91,7 @@ public class UserServiceImpl implements UserService {
 //            if there is token - that means - not confirmed
         if (optionalUsersEntity.isPresent()) {
 //                check time of token
-            boolean hastokenExpired = utils.hasTokenExpired(token);
+            boolean hastokenExpired = UserUtils.hasTokenExpired(token);
             Users userEntity = optionalUsersEntity.get();
             if (!hastokenExpired) {
                 userEntity.setConfirmEmailToken(null);
@@ -121,6 +107,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * method that return user for authentication
+     *
      * @param email
      * @return UserDto
      */
@@ -212,7 +199,6 @@ public class UserServiceImpl implements UserService {
     private UserResponseDto toDto(Users user) {
         return modelMapper.map(user, UserResponseDto.class);
     }
-
 
 
     @Override
