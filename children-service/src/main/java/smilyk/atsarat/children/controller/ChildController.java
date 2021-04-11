@@ -1,6 +1,8 @@
 package smilyk.atsarat.children.controller;
 
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import smilyk.atsarat.children.dto.AddChildDto;
@@ -14,7 +16,9 @@ import smilyk.atsarat.children.service.validator.ValidatorService;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @RestController
@@ -50,5 +54,15 @@ public class ChildController {
             returnValue.setOperationResult(RequestOperationStatus.ERROR.name());
         }
         return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
+    }
+
+    @GetMapping()
+    public Response getAllChildren(@RequestParam(value = "page", defaultValue = "0") int page,
+                                  @RequestParam(value = "limit", defaultValue = "2") int limit) {
+        List<ResponseChildDto> childs = childService.getAllChildren(page, limit);
+        Type listType = new TypeToken<List<ResponseChildDto>>() {
+        }.getType();
+        List<ResponseChildDto> returnValue = new ModelMapper().map(childs, listType);
+        return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
     }
 }

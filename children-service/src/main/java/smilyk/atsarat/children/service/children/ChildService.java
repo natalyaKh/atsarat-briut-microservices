@@ -14,4 +14,6 @@ public interface ChildService {
     Boolean deleteChild(String uuidChild);
 
     ResponseChildDto getChildByUuid(String uuidChild);
+
+    List<ResponseChildDto> getAllChildren(int page, int limit);
 }
