@@ -22,6 +22,7 @@ import smilyk.atsarat.utils.UuidUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -70,6 +71,27 @@ public class UserServiceImpl implements UserService {
         LOGGER.info(LoggerMessages.ADD_USER + ' ' + userEntity.getMainEmail());
         LOGGER.info(LoggerMessages.ADD_USER + ' ' + userEntity.getMainEmail());
         return new Response(userResponseDto, HttpServletResponse.SC_CREATED, currentDate);
+    }
+
+    @Override
+    public boolean verifyEmailToken(String token) {
+        boolean rez = false;
+        // Find user by token
+        Optional<Users> optionalUsersEntity = userRepo.findUserByConfirmEmailToken(token);
+//            if there is token - that means - not confirmed
+        if (optionalUsersEntity.isPresent()) {
+//                check time of token
+            boolean hastokenExpired = utils.hasTokenExpired(token);
+            Users userEntity = optionalUsersEntity.get();
+            if (!hastokenExpired) {
+                userEntity.setConfirmEmailToken(null);
+                userEntity.setConfirmEmail(Boolean.TRUE);
+                userRepo.save(userEntity);
+                LOGGER.info(LoggerMessages.USER_CONFIRM_EMAIL + userEntity.getMainEmail());
+                rez = true;
+            }
+        }
+        return rez;
     }
 }
 
