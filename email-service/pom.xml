@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>smilyk.atsarat</groupId>
+
     <artifactId>email-service</artifactId>
-    <name>email-service</name>
+
     <description>email-service module for project atsarat-briut microservices</description>
 
     <properties>

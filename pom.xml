@@ -187,6 +187,7 @@
         <module>user-service</module>
         <module>eureka-service</module>
         <module>email-service</module>
+        <module>children-service</module>
     </modules>
 
 </project>
