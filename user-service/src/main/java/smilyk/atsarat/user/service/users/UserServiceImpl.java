@@ -175,6 +175,23 @@ public class UserServiceImpl implements UserService {
         return returnValue;
     }
 
+    @Override
+    public Boolean deleteUser(String uuidUser) {
+        Optional<Users> optionalUserEntity = userRepo.findByUuidUserAndDeleted(uuidUser, false);
+        if (!optionalUserEntity.isPresent()) {
+            LOGGER.error(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.NOT_FOUND);
+            throw new UsernameNotFoundException(
+                ErrorMessages.USER_WITH_UUID + uuidUser + ErrorMessages.NOT_FOUND);
+        }
+        Users userEntity = optionalUserEntity.get();
+        userEntity.setDeleted(true);
+//        if user deleted - dont wont to have his teudat zeut
+        userEntity.setTz("000000000");
+        userRepo.save(userEntity);
+        LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.DELETED + currentDate);
+        return true;
+    }
+
     private UserResponseDto toDto(Users user) {
         return modelMapper.map(user, UserResponseDto.class);
     }

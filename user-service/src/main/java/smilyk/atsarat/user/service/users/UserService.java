@@ -25,4 +25,6 @@ public interface UserService extends UserDetailsService {
     UserResponseDto getUserByUserId(String uuidUser);
 
     List<UserResponseDto> getUsers(int page, int limit);
+
+    Boolean deleteUser(String id);
 }

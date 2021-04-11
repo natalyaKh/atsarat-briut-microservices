@@ -84,6 +84,23 @@ public class UserController {
         return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
     }
 
+    /** method change flag deleted to true in DB
+     * @param id
+     * @return {@link RequestOperationStatus}
+     */
+    @DeleteMapping(path = "/{id}")
+    public Response deleteUser(@PathVariable String id) {
+        OperationStatusModel returnValue = new OperationStatusModel();
+        returnValue.setOperationName(RequestOperationName.DELETE.name());
+        Boolean deleted = userService.deleteUser(id);
+        if(deleted){
+            returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
+        }else{
+            returnValue.setOperationResult(RequestOperationStatus.ERROR.name());
+        }
+        return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
+    }
+
     /**
      * email-verification - confirm-email
      * http://localhost:8080/users/email-verification?token=sdfsdf
