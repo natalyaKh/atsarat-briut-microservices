@@ -1,21 +1,20 @@
 package smilyk.atsarat.user.dto;
+
 import lombok.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-
-public class UserDto {
-    private long id;
+@EqualsAndHashCode
+public class UpdateUserDto {
     private String uuidUser;
     private String firstName;
     private String secondName;
-    private String mainEmail;
-    private String password;
+    @Size(min=9, max=9, message = " tz should contains 9 numbers")
     private String tz;
-    private String confirmEmailToken;
-    private Boolean deleted;
-    private Boolean confirmEmail;
 }
