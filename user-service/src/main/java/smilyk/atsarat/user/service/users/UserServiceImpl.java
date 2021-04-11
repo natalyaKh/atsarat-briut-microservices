@@ -4,16 +4,17 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-import smilyk.atsarat.user.dto.AddUserDto;
-import smilyk.atsarat.user.dto.EmailVerificationDto;
-import smilyk.atsarat.user.dto.Response;
-import smilyk.atsarat.user.dto.UserResponseDto;
+import smilyk.atsarat.user.dto.*;
 import smilyk.atsarat.user.enums.LoggerMessages;
 import smilyk.atsarat.user.models.Users;
 import smilyk.atsarat.user.repo.UserRepo;
@@ -22,6 +23,9 @@ import smilyk.atsarat.utils.UuidUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+
+import java.util.ArrayList;
+
 import java.util.Optional;
 
 @Service
@@ -93,5 +97,37 @@ public class UserServiceImpl implements UserService {
         }
         return rez;
     }
+
+
+    /**
+     * method that return user for authentication
+     * @param email
+     * @return UserDto
+     */
+    @Override
+    public UserDto getUser(String email) {
+        Optional<Users> optionalUser = userRepo.findByMainEmail(email);
+        if (!optionalUser.isPresent())
+            throw new UsernameNotFoundException(email);
+        UserDto returnValue = new UserDto();
+        BeanUtils.copyProperties(optionalUser.get(), returnValue);
+        return returnValue;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Users> optionalUser = userRepo.findByMainEmail(email);
+        if (!optionalUser.isPresent())
+            throw new UsernameNotFoundException(email);
+        /**
+         * if optionalUser.get().getConfirmEmail(), == false -> login return error
+         */
+        return new User(optionalUser.get().getMainEmail(),
+            optionalUser.get().getPassword(),
+            optionalUser.get().getConfirmEmail(),
+            true, true, true, new ArrayList<>());
+    }
+
+
 }
 
