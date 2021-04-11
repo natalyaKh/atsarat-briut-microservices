@@ -4,6 +4,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import smilyk.atsarat.user.dto.*;
 
+import java.util.List;
+
 @Service
 public interface UserService extends UserDetailsService {
     Response createUser(AddUserDto userDetails);
@@ -21,4 +23,6 @@ public interface UserService extends UserDetailsService {
     UpdateUserDto updateUser(String id, UpdateUserDto userDetails);
 
     UserResponseDto getUserByUserId(String uuidUser);
+
+    List<UserResponseDto> getUsers(int page, int limit);
 }
