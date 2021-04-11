@@ -6,6 +6,14 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import smilyk.atsarat.user.dto.*;
+
+
+import smilyk.atsarat.user.dto.*;
+
+import smilyk.atsarat.user.dto.AddUserDto;
+import smilyk.atsarat.user.dto.OperationStatusModel;
+import smilyk.atsarat.user.dto.Response;
+import smilyk.atsarat.user.dto.UpdateUserDto;
 import smilyk.atsarat.user.enums.RequestOperationName;
 import smilyk.atsarat.user.enums.RequestOperationStatus;
 import smilyk.atsarat.user.service.users.UserService;
@@ -47,6 +55,9 @@ public class UserController {
     /**
      * method update {@link smilyk.atsarat.user.models.Users} in DB
      *
+
+
+     *method update {@link smilyk.atsarat.user.models.Users} in DB
      * @param id
      * @param userDetails
      * @return {@link UpdateUserDto}
@@ -57,9 +68,9 @@ public class UserController {
         return new Response(updateUser, HttpServletResponse.SC_OK, currentDate);
     }
 
-    /**
+
+/**
      * method returns {@link UserResponseDto} by uuid of user
-     *
      * @param uuidUser
      * @return
      */
@@ -68,6 +79,7 @@ public class UserController {
         UserResponseDto userDto = userService.getUserByUserId(uuidUser);
         return new Response(userDto, HttpServletResponse.SC_FOUND, currentDate);
     }
+
 
     /**
      * @param page
