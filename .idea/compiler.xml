@@ -13,6 +13,13 @@
         <module name="utils" />
         <module name="email" />
       </profile>
+      <profile name="Annotation profile for Unknown" enabled="true">
+        <sourceOutputDir name="../../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wrapper (2)" />
+        <module name="wrapper (1)" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="atsarat-briut-microservices" target="1.8" />
@@ -22,6 +29,8 @@
       <module name="user-service" target="11" />
       <module name="utils" target="11" />
       <module name="utilsnew" target="11" />
+      <module name="wrapper (1)" target="1.5" />
+      <module name="wrapper (2)" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

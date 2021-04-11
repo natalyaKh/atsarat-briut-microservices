@@ -9,6 +9,8 @@
       <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/utilsnew/utilsnew.iml" filepath="$PROJECT_DIR$/utilsnew/utilsnew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service/.mvn/wrapper/wrapper (1).iml" filepath="$PROJECT_DIR$/user-service/.mvn/wrapper/wrapper (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/.mvn/wrapper/wrapper (2).iml" filepath="$PROJECT_DIR$/utils/.mvn/wrapper/wrapper (2).iml" />
     </modules>
   </component>
 </project>
