@@ -1,8 +1,12 @@
 package smilyk.atsarat.user.controllers;
 
 import lombok.SneakyThrows;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import smilyk.atsarat.user.dto.*;
+
 
 import smilyk.atsarat.user.dto.*;
 
@@ -10,7 +14,6 @@ import smilyk.atsarat.user.dto.AddUserDto;
 import smilyk.atsarat.user.dto.OperationStatusModel;
 import smilyk.atsarat.user.dto.Response;
 import smilyk.atsarat.user.dto.UpdateUserDto;
-
 import smilyk.atsarat.user.enums.RequestOperationName;
 import smilyk.atsarat.user.enums.RequestOperationStatus;
 import smilyk.atsarat.user.service.users.UserService;
@@ -18,7 +21,9 @@ import smilyk.atsarat.user.service.validator.ValidateUserService;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @RestController
@@ -34,6 +39,7 @@ public class UserController {
 
     /**
      * create {@link smilyk.atsarat.user.models.Users} user and save it to DB
+     *
      * @param userDetails
      * @return
      * @throws Exception
@@ -42,25 +48,28 @@ public class UserController {
     public Response createUser(@RequestBody AddUserDto userDetails) throws Exception {
         Boolean validations = validatorService.checkUniqueEmail(userDetails.getMainEmail());
 //        TODO create normal exception
-        if(!validations) throw new Exception("gg");
+        if (!validations) throw new Exception("gg");
         return userService.createUser(userDetails);
     }
 
     /**
+     * method update {@link smilyk.atsarat.user.models.Users} in DB
      *
+
+
      *method update {@link smilyk.atsarat.user.models.Users} in DB
      * @param id
      * @param userDetails
      * @return {@link UpdateUserDto}
      */
     @PutMapping(path = "/{id}")
-    public Response updateUser(@PathVariable String id,  @Valid @RequestBody UpdateUserDto userDetails) {
+    public Response updateUser(@PathVariable String id, @Valid @RequestBody UpdateUserDto userDetails) {
         UpdateUserDto updateUser = userService.updateUser(id, userDetails);
-        return new Response(updateUser,HttpServletResponse.SC_OK, currentDate);
+        return new Response(updateUser, HttpServletResponse.SC_OK, currentDate);
     }
 
-    /**
 
+/**
      * method returns {@link UserResponseDto} by uuid of user
      * @param uuidUser
      * @return
@@ -72,11 +81,25 @@ public class UserController {
     }
 
 
+    /**
+     * @param page
+     * @param limit
+     * @return list of {@link UserResponseDto}
+     */
+    @GetMapping()
+    public Response getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
+                             @RequestParam(value = "limit", defaultValue = "2") int limit) {
+        List<UserResponseDto> users = userService.getUsers(page, limit);
+        Type listType = new TypeToken<List<UserResponseDto>>() {
+        }.getType();
+        List<UserResponseDto> returnValue = new ModelMapper().map(users, listType);
+        return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
+    }
 
-     *
+    /**
      * email-verification - confirm-email
      * http://localhost:8080/users/email-verification?token=sdfsdf
-     * */
+     */
     @GetMapping(path = "/email-verification")
     public Response verifyEmailToken(@RequestParam(value = "token") String token) {
         OperationStatusModel returnValue = new OperationStatusModel();

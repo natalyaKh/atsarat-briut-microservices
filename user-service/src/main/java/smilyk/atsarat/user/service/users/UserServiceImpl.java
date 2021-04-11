@@ -7,6 +7,11 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +32,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
+
+
+import java.util.List;
+
 
 import java.util.Optional;
 
@@ -117,7 +126,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-
     public UpdateUserDto updateUser(String uuidUser, UpdateUserDto user) {
         Optional<Users> optionalUserEntity = userRepo.findByUuidUserAndDeleted(uuidUser, false);
         if (!optionalUserEntity.isPresent()) {
@@ -159,6 +167,23 @@ public class UserServiceImpl implements UserService {
         }
         LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.WAS_RETURND);
         return modelMapper.map(optionalUserEntity.get(), UserResponseDto.class);
+    }
+
+
+    @Override
+    public List<UserResponseDto> getUsers(int page, int limit) {
+        if (page > 0) page = page - 1;
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<Users> usersPage = userRepo.findAll(pageableRequest);
+        List<Users> users = usersPage.getContent();
+        List<UserResponseDto> returnValue = new ArrayList<>();
+        users.stream().filter(user -> !user.getDeleted()).map(this::toDto)
+            .forEachOrdered(returnValue::add);
+        return returnValue;
+    }
+
+    private UserResponseDto toDto(Users user) {
+        return modelMapper.map(user, UserResponseDto.class);
     }
 
 
