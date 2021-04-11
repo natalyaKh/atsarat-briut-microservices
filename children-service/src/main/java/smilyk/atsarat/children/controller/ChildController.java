@@ -5,10 +5,12 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import smilyk.atsarat.children.dto.AddChildDto;
 import smilyk.atsarat.children.dto.OperationStatusModel;
 import smilyk.atsarat.children.dto.Response;
 import smilyk.atsarat.children.dto.ResponseChildDto;
+
 import smilyk.atsarat.children.enums.RequestOperationName;
 import smilyk.atsarat.children.enums.RequestOperationStatus;
 import smilyk.atsarat.children.service.children.ChildService;
@@ -69,11 +71,13 @@ public class ChildController {
         return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
     }
 
+
     /**
      * @param page, default = 0
      * @param limit, defaule = 2
      * @return list of {@link ResponseChildDto}
      */
+
     @GetMapping()
     public Response getAllChildren(@RequestParam(value = "page", defaultValue = "0") int page,
                                   @RequestParam(value = "limit", defaultValue = "2") int limit) {
@@ -82,5 +86,14 @@ public class ChildController {
         }.getType();
         List<ResponseChildDto> returnValue = new ModelMapper().map(childs, listType);
         return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
+
+
+
+    @PutMapping(path = "/{uuidChild}")
+    public Response updateChild(@PathVariable String uuidChild, @Valid @RequestBody UpdateChildDto childDetails) {
+        UpdateChildDto updateChild = childService.updateChild(uuidChild, childDetails);
+        return new Response(updateChild,HttpServletResponse.SC_OK, currentDate);
+
+
     }
 }
