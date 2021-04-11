@@ -150,6 +150,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponseDto getUserByUserId(String uuidUser) {
+        Optional<Users> optionalUserEntity = userRepo.findByUuidUserAndDeleted(uuidUser, false);
+        if (!optionalUserEntity.isPresent()) {
+            LOGGER.error(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.NOT_FOUND);
+            throw new UsernameNotFoundException(
+                ErrorMessages.USER_WITH_UUID + uuidUser + ErrorMessages.NOT_FOUND);
+        }
+        LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.WAS_RETURND);
+        return modelMapper.map(optionalUserEntity.get(), UserResponseDto.class);
+    }
+
+
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Users> optionalUser = userRepo.findByMainEmail(email);
         if (!optionalUser.isPresent())

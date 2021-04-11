@@ -3,10 +3,14 @@ package smilyk.atsarat.user.controllers;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import smilyk.atsarat.user.dto.*;
+
 import smilyk.atsarat.user.dto.AddUserDto;
 import smilyk.atsarat.user.dto.OperationStatusModel;
 import smilyk.atsarat.user.dto.Response;
 import smilyk.atsarat.user.dto.UpdateUserDto;
+
 import smilyk.atsarat.user.enums.RequestOperationName;
 import smilyk.atsarat.user.enums.RequestOperationStatus;
 import smilyk.atsarat.user.service.users.UserService;
@@ -56,6 +60,19 @@ public class UserController {
     }
 
     /**
+
+     * method returns {@link UserResponseDto} by uuid of user
+     * @param uuidUser
+     * @return
+     */
+    @GetMapping(path = "/{uuidUser}")
+    public Response getUser(@PathVariable String uuidUser) {
+        UserResponseDto userDto = userService.getUserByUserId(uuidUser);
+        return new Response(userDto, HttpServletResponse.SC_FOUND, currentDate);
+    }
+
+
+
      *
      * email-verification - confirm-email
      * http://localhost:8080/users/email-verification?token=sdfsdf
