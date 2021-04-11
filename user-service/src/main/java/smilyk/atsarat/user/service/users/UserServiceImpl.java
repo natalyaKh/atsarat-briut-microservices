@@ -12,6 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +27,6 @@ import org.springframework.stereotype.Service;
 
 import smilyk.atsarat.user.dto.*;
 import smilyk.atsarat.user.enums.ErrorMessages;
-
 import smilyk.atsarat.user.enums.LoggerMessages;
 import smilyk.atsarat.user.models.Users;
 import smilyk.atsarat.user.repo.UserRepo;
@@ -32,11 +37,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
-
-
 import java.util.List;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -182,10 +186,28 @@ public class UserServiceImpl implements UserService {
         return returnValue;
     }
 
+
+    @Override
+    public Boolean deleteUser(String uuidUser) {
+        Optional<Users> optionalUserEntity = userRepo.findByUuidUserAndDeleted(uuidUser, false);
+        if (!optionalUserEntity.isPresent()) {
+            LOGGER.error(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.NOT_FOUND);
+            throw new UsernameNotFoundException(
+                ErrorMessages.USER_WITH_UUID + uuidUser + ErrorMessages.NOT_FOUND);
+        }
+        Users userEntity = optionalUserEntity.get();
+        userEntity.setDeleted(true);
+//        if user deleted - dont wont to have his teudat zeut
+        userEntity.setTz("000000000");
+        userRepo.save(userEntity);
+        LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.DELETED + currentDate);
+        return true;
+    }
+
+
     private UserResponseDto toDto(Users user) {
         return modelMapper.map(user, UserResponseDto.class);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

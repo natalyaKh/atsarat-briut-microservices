@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import smilyk.atsarat.user.dto.*;
 
 
+
 import smilyk.atsarat.user.dto.*;
 
 import smilyk.atsarat.user.dto.AddUserDto;
 import smilyk.atsarat.user.dto.OperationStatusModel;
 import smilyk.atsarat.user.dto.Response;
 import smilyk.atsarat.user.dto.UpdateUserDto;
+
 import smilyk.atsarat.user.enums.RequestOperationName;
 import smilyk.atsarat.user.enums.RequestOperationStatus;
 import smilyk.atsarat.user.service.users.UserService;
@@ -55,8 +57,17 @@ public class UserController {
     /**
      * method update {@link smilyk.atsarat.user.models.Users} in DB
      *
+     * @param id
+     * @param userDetails
+     * @return {@link UpdateUserDto}
+     */
+    @PutMapping(path = "/{id}")
+    public Response updateUser(@PathVariable String id, @Valid @RequestBody UpdateUserDto userDetails) {
+        UpdateUserDto updateUser = userService.updateUser(id, userDetails);
+        return new Response(updateUser, HttpServletResponse.SC_OK, currentDate);
+    }
 
-
+    /**
      *method update {@link smilyk.atsarat.user.models.Users} in DB
      * @param id
      * @param userDetails
@@ -95,6 +106,25 @@ public class UserController {
         List<UserResponseDto> returnValue = new ModelMapper().map(users, listType);
         return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
     }
+
+
+    /** method change flag deleted to true in DB
+     * @param id
+     * @return {@link RequestOperationStatus}
+     */
+    @DeleteMapping(path = "/{id}")
+    public Response deleteUser(@PathVariable String id) {
+        OperationStatusModel returnValue = new OperationStatusModel();
+        returnValue.setOperationName(RequestOperationName.DELETE.name());
+        Boolean deleted = userService.deleteUser(id);
+        if(deleted){
+            returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
+        }else{
+            returnValue.setOperationResult(RequestOperationStatus.ERROR.name());
+        }
+        return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
+    }
+
 
     /**
      * email-verification - confirm-email
