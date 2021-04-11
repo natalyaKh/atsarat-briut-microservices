@@ -72,6 +72,25 @@
             <artifactId>flyway-core</artifactId>
             <version>5.2.3</version>
         </dependency>
+        <!--        To BCRYPT-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.3.3.RELEASE</version>
+        </dependency>
+        <!--        end of BYCRYPT-->
+        <!--        For create verificationEmail-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <!--        end for create verificationEmail-->
+        <!--       spring-security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
