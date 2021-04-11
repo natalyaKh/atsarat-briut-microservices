@@ -10,6 +10,7 @@ import smilyk.atsarat.user.dto.UserDto;
 public interface UserService extends UserDetailsService {
     Response createUser(AddUserDto userDetails);
     boolean verifyEmailToken(String token);
+
     //    need for addint in to token userUuid
 
     /**
@@ -18,4 +19,5 @@ public interface UserService extends UserDetailsService {
      * @return {@link UserDto}
      */
     UserDto getUser(String email);
+
 }
