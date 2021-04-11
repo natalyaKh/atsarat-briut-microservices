@@ -1,6 +1,8 @@
 package smilyk.atsarat.utils;
 
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
@@ -19,4 +21,23 @@ public class UserUtils { public String generateEmailVerificationToken(String use
         .compact();
     return token;
 }
+
+    /**
+     * method check if token expired
+     * @param token
+     * @return
+     */
+    public boolean hasTokenExpired(String token) {
+        boolean rez = false;
+        try {
+            Claims claims = Jwts.parser().setSigningKey(SecurityConstants.getTokenSecret()).parseClaimsJws(token)
+                .getBody();
+            Date tokenExpirationDate = claims.getExpiration();
+            Date todayDate = new Date();
+            rez = tokenExpirationDate.before(todayDate);
+        } catch (ExpiredJwtException ex) {
+            rez = true;
+        }
+        return rez;
+    }
 }

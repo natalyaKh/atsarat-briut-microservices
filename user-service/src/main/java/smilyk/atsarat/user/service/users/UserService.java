@@ -7,4 +7,5 @@ import smilyk.atsarat.user.dto.Response;
 @Service
 public interface UserService {
     Response createUser(AddUserDto userDetails);
+    boolean verifyEmailToken(String token);
 }

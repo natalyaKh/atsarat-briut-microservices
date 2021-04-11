@@ -8,17 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-service" />
-        <module name="user-service" />
+        <module name="user" />
         <module name="utilsnew" />
-        <module name="utils" />
         <module name="email" />
-      </profile>
-      <profile name="Annotation profile for Unknown" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="wrapper (2)" />
-        <module name="wrapper (1)" />
+        <module name="utils" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +19,7 @@
       <module name="common" target="1.8" />
       <module name="email" target="15" />
       <module name="eureka-service" target="15" />
+      <module name="user" target="11" />
       <module name="user-service" target="11" />
       <module name="utils" target="11" />
       <module name="utilsnew" target="11" />
@@ -39,6 +33,7 @@
       <module name="common" options="-parameters" />
       <module name="email" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
+      <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="utils" options="-parameters" />
       <module name="utilsnew" options="-parameters" />
