@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 import smilyk.atsarat.children.dto.AddChildDto;
 import smilyk.atsarat.children.dto.Response;
 import smilyk.atsarat.children.dto.ResponseChildDto;
+import smilyk.atsarat.children.enums.ErrorMessages;
 import smilyk.atsarat.children.enums.LoggerMessages;
+import smilyk.atsarat.children.exception.ChildrenServiceException;
 import smilyk.atsarat.children.model.ChildrenEntity;
 import smilyk.atsarat.children.repo.ChildRepo;
 import smilyk.atsarat.children.utils.ChildUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class ChildServiceImpl implements ChildService {
@@ -35,5 +38,20 @@ public class ChildServiceImpl implements ChildService {
         LOGGER.info(LoggerMessages.CHILD + LoggerMessages.FIRST_NAME + childrenEntity.getFirstName() +
             LoggerMessages.SECOND_NAME + childrenEntity.getSecondName() + LoggerMessages.SAVED);
         return  new Response(responseChildDto, HttpServletResponse.SC_CREATED, currentDate);
+    }
+
+    @Override
+    public Boolean deleteChild(String uuidChild) {
+        Optional<ChildrenEntity> optionalChildrenEntity = childRepo.findByUuidChildAndDeleted(uuidChild, false);
+        if (!optionalChildrenEntity.isPresent()) {
+            LOGGER.error(LoggerMessages.CHILD_WITH_UUID  + uuidChild + LoggerMessages.NOT_FOUND);
+            throw new ChildrenServiceException(
+                ErrorMessages.USER_WITH_UUID + uuidChild + ErrorMessages.NOT_FOUND);
+        }
+        ChildrenEntity childrenEntity = optionalChildrenEntity.get();
+        childrenEntity.setDeleted(true);
+        childRepo.save(childrenEntity);
+        LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidChild + LoggerMessages.DELETED);
+        return true;
     }
 }

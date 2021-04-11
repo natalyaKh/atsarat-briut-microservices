@@ -10,4 +10,5 @@ public interface ChildRepo extends JpaRepository<ChildrenEntity, Long> {
     Optional<ChildrenEntity> findByTzAndDeleted(String tz, boolean deleted);
 
 
+    Optional<ChildrenEntity> findByUuidChildAndDeleted(String uuidChild, boolean b);
 }

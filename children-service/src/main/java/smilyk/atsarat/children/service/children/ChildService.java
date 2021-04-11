@@ -10,4 +10,5 @@ import java.util.List;
 public interface ChildService {
     Response addChild(AddChildDto childDetails);
 
+    Boolean deleteChild(String uuidChild);
 }
