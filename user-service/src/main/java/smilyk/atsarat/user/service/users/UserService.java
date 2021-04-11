@@ -2,9 +2,27 @@ package smilyk.atsarat.user.service.users;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
 import smilyk.atsarat.user.dto.*;
 
 import java.util.List;
+
+
+import smilyk.atsarat.user.dto.*;
+
+import java.util.List;
+
+
+import smilyk.atsarat.user.dto.*;
+
+import smilyk.atsarat.user.dto.AddUserDto;
+import smilyk.atsarat.user.dto.Response;
+import smilyk.atsarat.user.dto.UpdateUserDto;
+
+import smilyk.atsarat.user.dto.UserDto;
+
+
+
 
 @Service
 public interface UserService extends UserDetailsService {
@@ -24,7 +42,12 @@ public interface UserService extends UserDetailsService {
 
     UserResponseDto getUserByUserId(String uuidUser);
 
+
     List<UserResponseDto> getUsers(int page, int limit);
 
     Boolean deleteUser(String id);
+
+
+    List<UserResponseDto> getUsers(int page, int limit);
+
 }
