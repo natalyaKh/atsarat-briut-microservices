@@ -54,4 +54,16 @@ public class ChildServiceImpl implements ChildService {
         LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidChild + LoggerMessages.DELETED);
         return true;
     }
+
+    @Override
+    public ResponseChildDto getChildByUuid(String uuidChild) {
+        Optional<ChildrenEntity> optionalChildrenEntity = childRepo.findByUuidChildAndDeleted(uuidChild, false);
+        if (!optionalChildrenEntity.isPresent()) {
+            LOGGER.error(LoggerMessages.CHILD_WITH_UUID  + uuidChild + LoggerMessages.NOT_FOUND);
+            throw new ChildrenServiceException(
+                ErrorMessages.USER_WITH_UUID + uuidChild + ErrorMessages.NOT_FOUND);
+        }
+        LOGGER.info(LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.WAS_RETURND);
+        return modelMapper.map(optionalChildrenEntity.get(), ResponseChildDto.class);
+    }
 }
