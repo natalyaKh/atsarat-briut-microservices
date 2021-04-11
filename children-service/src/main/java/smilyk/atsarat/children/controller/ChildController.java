@@ -24,7 +24,7 @@ public class ChildController {
     ValidatorService validatorService;
     @Autowired
     ChildService childService;
-//checkd
+
     @PostMapping()
     public Response createChild(@Valid @RequestBody AddChildDto childDetails) {
         validatorService.checkUniqueTZ(childDetails.getTz());
