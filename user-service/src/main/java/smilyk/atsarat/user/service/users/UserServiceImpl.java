@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import smilyk.atsarat.user.dto.*;
 import smilyk.atsarat.user.enums.ErrorMessages;
+
 import smilyk.atsarat.user.enums.LoggerMessages;
 import smilyk.atsarat.user.models.Users;
 import smilyk.atsarat.user.repo.UserRepo;
@@ -116,6 +117,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+
     public UpdateUserDto updateUser(String uuidUser, UpdateUserDto user) {
         Optional<Users> optionalUserEntity = userRepo.findByUuidUserAndDeleted(uuidUser, false);
         if (!optionalUserEntity.isPresent()) {
