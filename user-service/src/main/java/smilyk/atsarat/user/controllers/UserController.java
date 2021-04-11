@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 
 @RestController
+@RequestMapping("/users/v1")
 public class UserController {
     private String currentDate = LocalDateTime.now().toLocalDate().toString();
     @Autowired
@@ -29,8 +30,5 @@ public class UserController {
         if(!validations) throw new Exception("gg");
         return userService.createUser(userDetails);
     }
-    @GetMapping()
-    public String ping(){
-        return "work";
-    }
+
 }
