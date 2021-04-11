@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import smilyk.atsarat.children.dto.AddChildDto;
 import smilyk.atsarat.children.dto.Response;
 import smilyk.atsarat.children.dto.ResponseChildDto;
+import smilyk.atsarat.children.dto.UpdateChildDto;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface ChildService {
     Boolean deleteChild(String uuidChild);
 
     ResponseChildDto getChildByUuid(String uuidChild);
+
+    UpdateChildDto updateChild(String uuidChild, UpdateChildDto childDetails);
 }

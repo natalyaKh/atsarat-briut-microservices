@@ -5,9 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import smilyk.atsarat.children.dto.AddChildDto;
 import smilyk.atsarat.children.dto.Response;
 import smilyk.atsarat.children.dto.ResponseChildDto;
+import smilyk.atsarat.children.dto.UpdateChildDto;
 import smilyk.atsarat.children.enums.ErrorMessages;
 import smilyk.atsarat.children.enums.LoggerMessages;
 import smilyk.atsarat.children.exception.ChildrenServiceException;
@@ -16,6 +20,7 @@ import smilyk.atsarat.children.repo.ChildRepo;
 import smilyk.atsarat.children.utils.ChildUtils;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -66,4 +71,44 @@ public class ChildServiceImpl implements ChildService {
         LOGGER.info(LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.WAS_RETURND);
         return modelMapper.map(optionalChildrenEntity.get(), ResponseChildDto.class);
     }
+
+    @Override
+    public UpdateChildDto updateChild(String uuidChild, UpdateChildDto childDetails) {
+        Optional<ChildrenEntity> optionalChildrenEntity = childRepo.findByUuidChildAndDeleted(uuidChild, false);
+        if (!optionalChildrenEntity.isPresent()) {
+            LOGGER.error(LoggerMessages.CHILD_WITH_UUID  + uuidChild + LoggerMessages.NOT_FOUND);
+            throw new ChildrenServiceException(
+                ErrorMessages.USER_WITH_UUID + uuidChild + ErrorMessages.NOT_FOUND);
+        }
+        ChildrenEntity childrenEntity = optionalChildrenEntity.get();
+        if(childDetails.getFirstName() != null){
+            childrenEntity.setFirstName(childDetails.getFirstName());
+            LOGGER.info(LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.CHANGE + LoggerMessages.FIRST_NAME
+                + LoggerMessages.TO + childDetails.getFirstName());
+        }
+        if(childDetails.getSecondName() != null){
+            childrenEntity.setSecondName(childDetails.getSecondName());
+            LOGGER.info(LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.CHANGE + LoggerMessages.SECOND_NAME
+                + LoggerMessages.TO + childDetails.getSecondName());
+        }
+        if(childDetails.getTz() != null){
+            childrenEntity.setTz(childDetails.getTz());
+            LOGGER.info(LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.CHANGE + LoggerMessages.PROVIDED_TZ);
+        }
+        if(childDetails.getUuidParent() != null){
+            childrenEntity.setUuidParent(childDetails.getUuidParent());
+            LOGGER.info(LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.CHANGE + LoggerMessages.PARENT
+                + LoggerMessages.TO + LoggerMessages.PARENT + LoggerMessages.WITH_UUID +  childDetails.getUuidParent());
+        }
+        if(childDetails.getUuidRespPers() != null){
+            childrenEntity.setUuidRespPers(childDetails.getUuidRespPers());
+            LOGGER.info(LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.CHANGE + LoggerMessages.RESP_PERS
+                + LoggerMessages.TO + LoggerMessages.RESP_PERS + LoggerMessages.WITH_UUID +  childDetails.getUuidParent());
+        }
+        childRepo.save(childrenEntity);
+        LOGGER.info( LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.WAS_UPDATE);
+        return modelMapper.map(childrenEntity, UpdateChildDto.class);
+    }
+
+
 }
