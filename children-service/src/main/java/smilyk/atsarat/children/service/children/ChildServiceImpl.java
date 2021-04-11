@@ -4,6 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,6 +25,8 @@ import smilyk.atsarat.children.utils.ChildUtils;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -73,6 +78,22 @@ public class ChildServiceImpl implements ChildService {
     }
 
     @Override
+
+    public List<ResponseChildDto> getAllChildren(int page, int limit) {
+        if (page > 0) page = page - 1;
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<ChildrenEntity> childesPage = childRepo.findAll(pageableRequest);
+        List<ChildrenEntity> childes = childesPage.getContent();
+        List<ResponseChildDto> returnValue = new ArrayList<>();
+        childes.stream().filter(child -> !child.getDeleted()).map(this::toDto)
+            .forEachOrdered(returnValue::add);
+        return returnValue;
+    }
+
+    private ResponseChildDto toDto(ChildrenEntity child) {
+        return modelMapper.map(child, ResponseChildDto.class);
+    }
+
     public UpdateChildDto updateChild(String uuidChild, UpdateChildDto childDetails) {
         Optional<ChildrenEntity> optionalChildrenEntity = childRepo.findByUuidChildAndDeleted(uuidChild, false);
         if (!optionalChildrenEntity.isPresent()) {
@@ -109,6 +130,7 @@ public class ChildServiceImpl implements ChildService {
         LOGGER.info( LoggerMessages.CHILD_WITH_UUID + uuidChild + LoggerMessages.WAS_UPDATE);
         return modelMapper.map(childrenEntity, UpdateChildDto.class);
     }
+
 
 
 }

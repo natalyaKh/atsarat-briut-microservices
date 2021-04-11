@@ -6,6 +6,7 @@ import smilyk.atsarat.children.dto.Response;
 import smilyk.atsarat.children.dto.ResponseChildDto;
 import smilyk.atsarat.children.dto.UpdateChildDto;
 
+
 import java.util.List;
 
 @Service
@@ -16,5 +17,8 @@ public interface ChildService {
 
     ResponseChildDto getChildByUuid(String uuidChild);
 
+    List<ResponseChildDto> getAllChildren(int page, int limit);
+
     UpdateChildDto updateChild(String uuidChild, UpdateChildDto childDetails);
+
 }
