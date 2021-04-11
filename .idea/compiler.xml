@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-service" />
         <module name="user-service" />
-        <module name="utils" />
         <module name="utilsnew" />
+        <module name="utils" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -17,7 +17,7 @@
       <module name="common" target="1.8" />
       <module name="eureka-service" target="15" />
       <module name="user-service" target="11" />
-      <module name="utils" target="1.8" />
+      <module name="utils" target="11" />
       <module name="utilsnew" target="11" />
     </bytecodeTargetLevel>
   </component>
