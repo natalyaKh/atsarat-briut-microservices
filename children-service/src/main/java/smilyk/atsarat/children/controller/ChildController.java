@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import smilyk.atsarat.children.dto.AddChildDto;
 import smilyk.atsarat.children.dto.OperationStatusModel;
 import smilyk.atsarat.children.dto.Response;
+import smilyk.atsarat.children.dto.ResponseChildDto;
 import smilyk.atsarat.children.enums.RequestOperationName;
 import smilyk.atsarat.children.enums.RequestOperationStatus;
 import smilyk.atsarat.children.service.children.ChildService;
@@ -30,6 +31,12 @@ public class ChildController {
     public Response createChild(@Valid @RequestBody AddChildDto childDetails) {
         validatorService.checkUniqueTZ(childDetails.getTz());
         return childService.addChild(childDetails);
+    }
+
+    @GetMapping(path = "/{uuidChild}")
+    public Response getChild(@PathVariable String uuidChild) {
+        ResponseChildDto childDto = childService.getChildByUuid(uuidChild);
+        return new Response(childDto, HttpServletResponse.SC_FOUND, currentDate);
     }
 
     @DeleteMapping(path = "/{uuidChild}")
