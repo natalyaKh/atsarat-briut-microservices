@@ -12,4 +12,6 @@ public interface UserRepo extends JpaRepository<Users, Long> {
     Optional<Users> findByMainEmail(String mainEmail);
 
     Optional<Users> findUserByConfirmEmailToken(String token);
+
+    Optional<Users> findByUuidUserAndDeleted(String uuidUser, boolean b);
 }

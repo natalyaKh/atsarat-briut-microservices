@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 import smilyk.atsarat.user.dto.*;
+import smilyk.atsarat.user.enums.ErrorMessages;
 import smilyk.atsarat.user.enums.LoggerMessages;
 import smilyk.atsarat.user.models.Users;
 import smilyk.atsarat.user.repo.UserRepo;
@@ -112,6 +113,38 @@ public class UserServiceImpl implements UserService {
         UserDto returnValue = new UserDto();
         BeanUtils.copyProperties(optionalUser.get(), returnValue);
         return returnValue;
+    }
+
+    @Override
+    public UpdateUserDto updateUser(String uuidUser, UpdateUserDto user) {
+        Optional<Users> optionalUserEntity = userRepo.findByUuidUserAndDeleted(uuidUser, false);
+        if (!optionalUserEntity.isPresent()) {
+            LOGGER.error(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.NOT_FOUND);
+            throw new UsernameNotFoundException(
+                ErrorMessages.USER_WITH_UUID + uuidUser + ErrorMessages.NOT_FOUND);
+        }
+        LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.WAS_RETURND);
+        Users userEntity = optionalUserEntity.get();
+
+        if (user.getFirstName() != null) {
+            userEntity.setFirstName(user.getFirstName());
+            LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.CHANGE +
+                LoggerMessages.FIRST_NAME + user.getFirstName());
+        }
+        if (user.getSecondName() != null) {
+            userEntity.setSecondName(user.getSecondName());
+            LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.CHANGE +
+                LoggerMessages.SECOND_NAME + user.getSecondName());
+        }
+        if (user.getTz() != null) {
+            userEntity.setTz(user.getTz());
+//            TODO зашифровать ТЗ
+            LOGGER.info(LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.CHANGE +
+                LoggerMessages.TZ + user.getTz());
+        }
+        userRepo.save(userEntity);
+        LOGGER.info((LoggerMessages.USER_WITH_UUID + uuidUser + LoggerMessages.WAS_UPDATE));
+        return modelMapper.map(userEntity, UpdateUserDto.class);
     }
 
     @Override
