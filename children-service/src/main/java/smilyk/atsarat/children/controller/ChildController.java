@@ -31,18 +31,31 @@ public class ChildController {
     @Autowired
     ChildService childService;
 
+    /**
+     * method create {@link smilyk.atsarat.children.model.ChildrenEntity}
+     * @param childDetails
+     */
     @PostMapping()
     public Response createChild(@Valid @RequestBody AddChildDto childDetails) {
         validatorService.checkUniqueTZ(childDetails.getTz());
         return childService.addChild(childDetails);
     }
 
+    /**
+     * @param uuidChild
+     * @return {@link ResponseChildDto}
+     */
     @GetMapping(path = "/{uuidChild}")
     public Response getChild(@PathVariable String uuidChild) {
         ResponseChildDto childDto = childService.getChildByUuid(uuidChild);
         return new Response(childDto, HttpServletResponse.SC_FOUND, currentDate);
     }
 
+    /**
+     * make flag 'deleted' = true
+     * @param uuidChild
+     * @return {@link RequestOperationStatus}
+     */
     @DeleteMapping(path = "/{uuidChild}")
     public Response deleteChild(@PathVariable String uuidChild) {
         OperationStatusModel returnValue = new OperationStatusModel();
@@ -56,6 +69,11 @@ public class ChildController {
         return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
     }
 
+    /**
+     * @param page, default = 0
+     * @param limit, defaule = 2
+     * @return list of {@link ResponseChildDto}
+     */
     @GetMapping()
     public Response getAllChildren(@RequestParam(value = "page", defaultValue = "0") int page,
                                   @RequestParam(value = "limit", defaultValue = "2") int limit) {
