@@ -11,7 +11,6 @@ import smilyk.atsarat.children.dto.OperationStatusModel;
 import smilyk.atsarat.children.dto.Response;
 import smilyk.atsarat.children.dto.ResponseChildDto;
 
-
 import smilyk.atsarat.children.enums.RequestOperationName;
 import smilyk.atsarat.children.enums.RequestOperationStatus;
 import smilyk.atsarat.children.service.children.ChildService;
@@ -34,18 +33,31 @@ public class ChildController {
     @Autowired
     ChildService childService;
 
+    /**
+     * method create {@link smilyk.atsarat.children.model.ChildrenEntity}
+     * @param childDetails
+     */
     @PostMapping()
     public Response createChild(@Valid @RequestBody AddChildDto childDetails) {
         validatorService.checkUniqueTZ(childDetails.getTz());
         return childService.addChild(childDetails);
     }
 
+    /**
+     * @param uuidChild
+     * @return {@link ResponseChildDto}
+     */
     @GetMapping(path = "/{uuidChild}")
     public Response getChild(@PathVariable String uuidChild) {
         ResponseChildDto childDto = childService.getChildByUuid(uuidChild);
         return new Response(childDto, HttpServletResponse.SC_FOUND, currentDate);
     }
 
+    /**
+     * make flag 'deleted' = true
+     * @param uuidChild
+     * @return {@link RequestOperationStatus}
+     */
     @DeleteMapping(path = "/{uuidChild}")
     public Response deleteChild(@PathVariable String uuidChild) {
         OperationStatusModel returnValue = new OperationStatusModel();
@@ -60,6 +72,12 @@ public class ChildController {
     }
 
 
+    /**
+     * @param page, default = 0
+     * @param limit, defaule = 2
+     * @return list of {@link ResponseChildDto}
+     */
+
     @GetMapping()
     public Response getAllChildren(@RequestParam(value = "page", defaultValue = "0") int page,
                                   @RequestParam(value = "limit", defaultValue = "2") int limit) {
@@ -70,10 +88,12 @@ public class ChildController {
         return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
 
 
+
     @PutMapping(path = "/{uuidChild}")
     public Response updateChild(@PathVariable String uuidChild, @Valid @RequestBody UpdateChildDto childDetails) {
         UpdateChildDto updateChild = childService.updateChild(uuidChild, childDetails);
         return new Response(updateChild,HttpServletResponse.SC_OK, currentDate);
+
 
     }
 }
