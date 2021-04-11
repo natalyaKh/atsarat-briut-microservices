@@ -8,7 +8,3 @@ add rabbit MQ ->
 Login -> 
 
     -localhost:8080/users/login
-
-Logout -> 
-
-    -localhost:8080/users/logout
