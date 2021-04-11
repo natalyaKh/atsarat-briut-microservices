@@ -23,7 +23,9 @@ import smilyk.atsarat.utils.UuidUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
+
 import java.util.Optional;
 
 @Service
@@ -96,6 +98,7 @@ public class UserServiceImpl implements UserService {
         return rez;
     }
 
+
     /**
      * method that return user for authentication
      * @param email
@@ -124,6 +127,7 @@ public class UserServiceImpl implements UserService {
             optionalUser.get().getConfirmEmail(),
             true, true, true, new ArrayList<>());
     }
+
 
 }
 
