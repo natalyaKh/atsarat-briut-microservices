@@ -1,19 +1,19 @@
-package smilyk.atsarat.common.utils;
+package smilyk.atsarat.utils;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.UUID;
+
 /**
  * create uuid
  */
 @Component
-public class UuidUtils {
+public  class UuidUtils {
     /**
      *
      * @return random uuid
      */
-    public UUID generateUuid() {
+    public static UUID generateUuid() {
         return UUID.randomUUID();
     }
 }

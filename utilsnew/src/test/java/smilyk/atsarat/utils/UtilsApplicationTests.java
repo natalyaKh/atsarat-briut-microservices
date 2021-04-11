@@ -1,10 +1,10 @@
-package smilyk.atsarat.common;
+package smilyk.atsarat.utils;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CommonModuleApplicationTests {
+class UtilsApplicationTests {
 
     @Test
     void contextLoads() {
