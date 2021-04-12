@@ -91,6 +91,20 @@ public class PlanServiceImpl implements PlanService {
         return true;
     }
 
+    @Override
+    public List<ResponsePlanDTO> getAllPlanDetails(int page, int limit) {
+        if (page > 0) page = page - 1;
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<PlanEntity> plansPage = planRepo.findAll(pageableRequest);
+        List<PlanEntity> planDetails = plansPage.getContent();
+        List<ResponsePlanDTO> returnValue = new ArrayList<>();
+        planDetails.stream().filter(plan -> !plan.getDeleted()).map(this::toDto)
+            .forEachOrdered(returnValue::add);
+        LOGGER.info(LoggerMessages.LIST_OF_PLANNING_DETAILS + LoggerMessages.RETURNED);
+        return returnValue;
+    }
+
+
     private ResponsePlanDTO toDto(PlanEntity planEntity) {
         return modelMapper.map(planEntity, ResponsePlanDTO.class);
     }

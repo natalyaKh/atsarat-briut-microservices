@@ -15,4 +15,6 @@ public interface PlanService {
     ResponsePlanDTO getPlanDetaildByUuid(String uuidPlanDetails);
 
     Boolean deletePlanDetails(String uuidCPlanDetails);
+
+    List<ResponsePlanDTO> getAllPlanDetails(int page, int limit);
 }

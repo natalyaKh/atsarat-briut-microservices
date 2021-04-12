@@ -77,4 +77,13 @@ public class PlanController {
         return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
     }
 
+    @GetMapping()
+    public Response getAllPlanDetails(@RequestParam(value = "page", defaultValue = "0") int page,
+                                      @RequestParam(value = "limit", defaultValue = "10") int limit) {
+        List<ResponsePlanDTO> childDetails = planService.getAllPlanDetails(page, limit);
+        Type listType = new TypeToken<List<ResponsePlanDTO>>() {
+        }.getType();
+        List<ResponsePlanDTO> returnValue = new ModelMapper().map(childDetails, listType);
+        return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
+    }
 }
