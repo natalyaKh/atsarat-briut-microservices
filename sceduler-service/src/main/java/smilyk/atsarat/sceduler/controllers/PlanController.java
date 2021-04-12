@@ -39,6 +39,7 @@ public class PlanController {
         return planService.addPlanDetails(planDetails);
     }
 
+
     @GetMapping(path = "plan/{uuidChild}")
     public Response getPlanDetailsByChildUuid(@RequestParam(value = "page", defaultValue = "0") int page,
                                               @RequestParam(value = "limit", defaultValue = "10") int limit,
@@ -86,4 +87,5 @@ public class PlanController {
         List<ResponsePlanDTO> returnValue = new ModelMapper().map(childDetails, listType);
         return new Response(returnValue, HttpServletResponse.SC_FOUND, currentDate);
     }
+
 }
