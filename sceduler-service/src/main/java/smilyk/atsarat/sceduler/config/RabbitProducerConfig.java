@@ -1,10 +1,10 @@
-package smilyk.atsarat.user.config;
-
+package smilyk.atsarat.sceduler.config;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -16,39 +16,42 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @Configuration
-
-
-public class RabbitConfig {
+public class RabbitProducerConfig {
     private static final String type = "direct";
 
+    @Value("${rabbitmq.exchange}")
+    String exchange;
+    @Value(("${tsofim.queue}"))
+    String tsofimQueue;
     @Value(("${spring.rabbitmq.username}"))
     String rabbitUserName;
     @Value(("${spring.rabbitmq.password}"))
     String rabbitPassword;
-
-    @Value(("${email.queue}"))
-    String emailQueue;
-    @Value(("${email.exchange}"))
-    String emailExchange;
-    @Value(("${email.key}"))
-    String emailRoutingkey;
-
+    @Value("${tsofim.key}")
+    String tsofimRoutingkey;
 
 
 
     @Bean
-    public void createEmailQueue() {
-        ConnectionFactory factory = new ConnectionFactory();
+    public void createQuene() {
+        com.rabbitmq.client.ConnectionFactory factory = new com.rabbitmq.client.ConnectionFactory();
         factory.setPassword(rabbitPassword);
         factory.setUsername(rabbitUserName);
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
-            channel.queueDeclare(emailQueue, false, false, false, null);
-            channel.exchangeDeclare(emailExchange, type, true);
-            channel.queueBind(emailQueue, emailExchange, emailRoutingkey);
+            channel.queueDeclare(tsofimQueue, false, false, false, null);
+
+            channel.exchangeDeclare(exchange, type, true);
+            channel.queueBind(tsofimQueue, exchange, tsofimRoutingkey);
         } catch (TimeoutException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Bean
+    DirectExchange exchange() {
+        String name = exchange;
+        return new DirectExchange(name, true, false);
     }
 
     @Bean
@@ -57,10 +60,6 @@ public class RabbitConfig {
     }
 
 
-//    public AmqpTemplate rabbitTemplate(org.springframework.amqp.rabbit.connection.ConnectionFactory connectionFactory) {
-//        final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-//        rabbitTemplate.setMessageConverter(jsonMessageConverter());
-//        return rabbitTemplate;
-//    }
 }
+
 
