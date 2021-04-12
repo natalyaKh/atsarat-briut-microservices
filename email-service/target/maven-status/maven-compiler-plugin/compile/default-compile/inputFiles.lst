@@ -1,5 +1,4 @@
 /Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/controller/PingController.java
-/Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/security.java
 /Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/services/emailServices/EmailServiceImpl.java
 /Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/services/rabbitService/RabbitServiceImpl.java
 /Users/smilyk/Desktop/atsarat-britu-ver3/atsarat-briut-microservices/email-service/src/main/java/smilyk/atsarat/email/dto/RabbitDto.java
