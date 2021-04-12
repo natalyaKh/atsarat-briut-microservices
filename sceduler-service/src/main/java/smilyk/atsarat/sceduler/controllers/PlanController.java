@@ -51,4 +51,14 @@ public class PlanController {
         return new Response(responsePlanDTO, HttpServletResponse.SC_FOUND, currentDate);
     }
 
+    @GetMapping(path = "/{uuidPlanDetails}")
+    public Response getPlanDetailsByUuid(@PathVariable String uuidPlanDetails) {
+        ResponsePlanDTO responsePlanDTO = planService.getPlanDetaildByUuid(uuidPlanDetails);
+        if(responsePlanDTO == null){
+            return new Response(NOT_FOUND_STRING + uuidPlanDetails,
+                HttpServletResponse.SC_NO_CONTENT, currentDate);
+        }
+        return new Response(responsePlanDTO, HttpServletResponse.SC_FOUND, currentDate);
+    }
+
 }

@@ -11,4 +11,6 @@ public interface PlanService {
     public Response addPlanDetails(AddPlanDto planDetails);
 
     List<ResponsePlanDTO> getPlanDetailsByChildUuid(String uuidChild, int page, int limit);
+
+    ResponsePlanDTO getPlanDetaildByUuid(String uuidPlanDetails);
 }

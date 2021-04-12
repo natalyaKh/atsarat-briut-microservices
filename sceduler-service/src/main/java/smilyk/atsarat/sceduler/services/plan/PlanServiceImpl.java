@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -60,6 +61,19 @@ public class PlanServiceImpl implements PlanService {
         return returnValue;
 
     }
+
+    @Override
+    public ResponsePlanDTO getPlanDetaildByUuid(String uuidPlanDetails) {
+        Optional<PlanEntity> optionalPlanEntity = planRepo.findByUuidPlanAndDeleted(uuidPlanDetails,
+            false);
+        if (!optionalPlanEntity.isPresent()) {
+            LOGGER.info(LoggerMessages.PLAN + LoggerMessages.WITH_UUID + uuidPlanDetails +
+                LoggerMessages.NOT_FOUND);
+            return null;
+        }
+        return modelMapper.map(optionalPlanEntity.get(), ResponsePlanDTO.class);
+    }
+
     private ResponsePlanDTO toDto(PlanEntity planEntity) {
         return modelMapper.map(planEntity, ResponsePlanDTO.class);
     }
