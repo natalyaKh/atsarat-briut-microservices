@@ -5,10 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import smilyk.atsarat.children.dto.AddChildDto;
-import smilyk.atsarat.children.dto.OperationStatusModel;
-import smilyk.atsarat.children.dto.Response;
-import smilyk.atsarat.children.dto.ResponseChildDto;
+import smilyk.atsarat.children.dto.*;
 import smilyk.atsarat.children.enums.RequestOperationName;
 import smilyk.atsarat.children.enums.RequestOperationStatus;
 import smilyk.atsarat.children.service.children.ChildService;
@@ -39,6 +36,12 @@ public class ChildController {
     public Response createChild(@Valid @RequestBody AddChildDto childDetails) {
         validatorService.checkUniqueTZ(childDetails.getTz());
         return childService.addChild(childDetails);
+    }
+
+    @PutMapping(path = "/{uuidChild}")
+    public Response updateChild(@PathVariable String uuidChild,  @Valid @RequestBody UpdateChildDto childDetails) {
+        UpdateChildDto updateChild = childService.updateChild(uuidChild, childDetails);
+        return new Response(updateChild,HttpServletResponse.SC_OK, currentDate);
     }
 
     /**
