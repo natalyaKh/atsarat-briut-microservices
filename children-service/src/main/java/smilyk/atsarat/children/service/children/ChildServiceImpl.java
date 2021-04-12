@@ -94,6 +94,7 @@ public class ChildServiceImpl implements ChildService {
         return modelMapper.map(child, ResponseChildDto.class);
     }
 
+    @Override
     public UpdateChildDto updateChild(String uuidChild, UpdateChildDto childDetails) {
         Optional<ChildrenEntity> optionalChildrenEntity = childRepo.findByUuidChildAndDeleted(uuidChild, false);
         if (!optionalChildrenEntity.isPresent()) {
