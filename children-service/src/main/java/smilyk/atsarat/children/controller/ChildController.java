@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-import smilyk.atsarat.children.dto.AddChildDto;
-import smilyk.atsarat.children.dto.OperationStatusModel;
-import smilyk.atsarat.children.dto.Response;
-import smilyk.atsarat.children.dto.ResponseChildDto;
+import smilyk.atsarat.children.dto.*;
 
 
 import smilyk.atsarat.children.enums.RequestOperationName;
