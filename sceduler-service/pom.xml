@@ -12,11 +12,6 @@
     <artifactId>sceduler-service</artifactId>
     <description>scheduler-service for project atsarat-briut microservices</description>
 
-    <properties>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
-    </properties>
-
 
     <dependencies>
         <!--        security-->

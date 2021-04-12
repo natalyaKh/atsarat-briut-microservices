@@ -9,6 +9,7 @@ import smilyk.atsarat.sceduler.dto.AddPlanDto;
 import smilyk.atsarat.sceduler.dto.Response;
 import smilyk.atsarat.sceduler.services.plan.PlanService;
 
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.lang.reflect.Type;
@@ -33,7 +34,5 @@ public class PlanController {
     public Response createPlanDetails(@Valid @RequestBody AddPlanDto planDetails) {
         return planService.addPlanDetails(planDetails);
     }
-
-
 
 }

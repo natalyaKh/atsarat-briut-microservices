@@ -8,17 +8,22 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-service" />
-        <module name="user" />
-        <module name="utilsnew" />
-        <module name="email" />
         <module name="utils" />
+        <module name="email-service" />
+        <module name="children-service" />
+        <module name="user-service" />
+        <module name="sceduler-service" />
+        <module name="utilsnew" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="atsarat-briut-microservices" target="1.8" />
+      <module name="atsarat-briut-microservices" target="11" />
+      <module name="children-service" target="1.8" />
       <module name="common" target="1.8" />
       <module name="email" target="15" />
+      <module name="email-service" target="11" />
       <module name="eureka-service" target="15" />
+      <module name="sceduler-service" target="11" />
       <module name="user" target="11" />
       <module name="user-service" target="11" />
       <module name="utils" target="11" />
@@ -30,9 +35,12 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="atsarat-briut-microservices" options="-parameters" />
+      <module name="children-service" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="email" options="-parameters" />
+      <module name="email-service" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
+      <module name="sceduler-service" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="utils" options="-parameters" />
