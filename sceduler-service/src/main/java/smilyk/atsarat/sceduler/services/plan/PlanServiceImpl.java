@@ -74,6 +74,23 @@ public class PlanServiceImpl implements PlanService {
         return modelMapper.map(optionalPlanEntity.get(), ResponsePlanDTO.class);
     }
 
+    @Override
+    public Boolean deletePlanDetails(String uuidCPlanDetails) {
+        Optional<PlanEntity> optionalPlanEntity = planRepo.findByUuidPlanAndDeleted(uuidCPlanDetails,
+            false);
+        if (!optionalPlanEntity.isPresent()) {
+            LOGGER.info(LoggerMessages.PLAN + LoggerMessages.WITH_UUID + uuidCPlanDetails +
+                LoggerMessages.NOT_FOUND);
+            return false;
+        }
+        PlanEntity planEntity = optionalPlanEntity.get();
+        planEntity.setDeleted(true);
+        planRepo.save(planEntity);
+        LOGGER.info(LoggerMessages.PLAN + LoggerMessages.WITH_UUID + uuidCPlanDetails +
+            LoggerMessages.WAS_DELETED);
+        return true;
+    }
+
     private ResponsePlanDTO toDto(PlanEntity planEntity) {
         return modelMapper.map(planEntity, ResponsePlanDTO.class);
     }

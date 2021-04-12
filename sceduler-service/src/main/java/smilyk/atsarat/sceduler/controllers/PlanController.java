@@ -6,8 +6,11 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import smilyk.atsarat.sceduler.dto.AddPlanDto;
+import smilyk.atsarat.sceduler.dto.OperationStatusModel;
 import smilyk.atsarat.sceduler.dto.Response;
 import smilyk.atsarat.sceduler.dto.ResponsePlanDTO;
+import smilyk.atsarat.sceduler.enums.RequestOperationName;
+import smilyk.atsarat.sceduler.enums.RequestOperationStatus;
 import smilyk.atsarat.sceduler.services.plan.PlanService;
 
 
@@ -59,6 +62,19 @@ public class PlanController {
                 HttpServletResponse.SC_NO_CONTENT, currentDate);
         }
         return new Response(responsePlanDTO, HttpServletResponse.SC_FOUND, currentDate);
+    }
+
+    @DeleteMapping(path = "/{uuidCPlanDetails}")
+    public Response deletePlanDetails(@PathVariable String uuidCPlanDetails) {
+        OperationStatusModel returnValue = new OperationStatusModel();
+        returnValue.setOperationName(RequestOperationName.DELETE.name());
+        Boolean deleted = planService.deletePlanDetails(uuidCPlanDetails);
+        if(deleted){
+            returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
+        }else{
+            returnValue.setOperationResult(RequestOperationStatus.ERROR.name());
+        }
+        return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
     }
 
 }
