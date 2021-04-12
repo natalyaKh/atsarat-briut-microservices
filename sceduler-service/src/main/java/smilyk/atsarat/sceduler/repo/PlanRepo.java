@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface PlanRepo extends JpaRepository<PlanEntity, Long> {
 
 
-
+    Optional<PlanEntity> findByUuidPlanAndDeleted(String uuidPlanDetails, boolean b);
 }
