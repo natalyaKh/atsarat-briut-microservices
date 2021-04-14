@@ -51,9 +51,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                  * только тот, кто вошел в пприложение, может менять что то в нем
                  */
                 .addFilter(new AuthorizationFilter(authenticationManager()));
-                /**
-                 * убираем кеширование токена
-                 */
+        /**
+         * убираем кеширование токена
+         */
     }
 
     @Override
