@@ -12,11 +12,6 @@
     <artifactId>eureka-service</artifactId>
     <name>eureka-service</name>
     <description>eureka-service module for project atsarat-briut microservices</description>
-    <properties>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
-        <java.version>11</java.version>
-    </properties>
 
     <dependencies>
         <dependency>
