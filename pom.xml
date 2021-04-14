@@ -203,6 +203,7 @@
         <module>children-service</module>
         <module>sceduler-service</module>
         <module>tsofim-servise</module>
+        <module>zuul-service</module>
     </modules>
 
 </project>
