@@ -14,4 +14,6 @@ public interface TsofimDetailsService {
 
 
     ResponseTsofimDetails updateTsofimDetails(UpdateTsofimDetailDto tsofimDetails);
+
+    ResponseTsofimDetails getChildDetailsByChildUuid(String uuidChild);
 }
