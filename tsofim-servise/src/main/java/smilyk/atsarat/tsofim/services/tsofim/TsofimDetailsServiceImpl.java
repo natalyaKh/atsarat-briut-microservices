@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import smilyk.atsarat.tsofim.dto.AddTsofimDetailsDto;
 import smilyk.atsarat.tsofim.dto.Response;
 import smilyk.atsarat.tsofim.dto.ResponseTsofimDetails;
+import smilyk.atsarat.tsofim.dto.UpdateTsofimDetailDto;
 import smilyk.atsarat.tsofim.enums.LoggerMessages;
 import smilyk.atsarat.tsofim.model.TsofimDetails;
 import smilyk.atsarat.tsofim.repo.TsofimDetailsRepo;
@@ -46,5 +47,45 @@ public class TsofimDetailsServiceImpl implements TsofimDetailsService {
         LOGGER.info(LoggerMessages.CHILD + LoggerMessages.WITH_UUID + LoggerMessages.WAS_SAVE);
         ResponseTsofimDetails responseTsofimDetails = modelMapper.map(tsofimDetailsEntity, ResponseTsofimDetails.class);
         return new Response(responseTsofimDetails, HttpServletResponse.SC_CREATED, currentDate);
+    }
+
+    @Override
+    public ResponseTsofimDetails updateTsofimDetails(UpdateTsofimDetailDto tsofimDetails) {
+        Optional<TsofimDetails> optionalTsofimDetails = tsofimDetailsRepo.findByUuidChildAndDeleted(tsofimDetails.getUuidChild(),
+            false);
+        if(!optionalTsofimDetails.isPresent()){
+            LOGGER.info(LoggerMessages.CHILD + LoggerMessages.WITH_UUID + tsofimDetails.getUuidChild() +
+                LoggerMessages.NOT_FOUND);
+            return null;
+        }
+        TsofimDetails tsofimDetailsEntity = optionalTsofimDetails.get();
+        if(!tsofimDetails.getGroupTs().isEmpty()){
+            tsofimDetailsEntity.setGroupTs(tsofimDetails.getGroupTs());
+            LOGGER.info(LoggerMessages.TSOFIM_DETAILS + LoggerMessages.WITH_UUID + tsofimDetails.getUuidChild() +
+                LoggerMessages.WAS_UPDATE +
+                ": new Group " + tsofimDetails.getGroupTs());
+        }
+        if(!tsofimDetails.getPlace().isEmpty()){
+            tsofimDetailsEntity.setPlace(tsofimDetails.getPlace());
+            LOGGER.info(LoggerMessages.TSOFIM_DETAILS + LoggerMessages.WITH_UUID + tsofimDetails.getUuidChild() +
+                LoggerMessages.WAS_UPDATE +
+                ": new Place " + tsofimDetails.getPlace());
+        }
+        if(!tsofimDetails.getSchool().isEmpty()){
+            tsofimDetailsEntity.setSchool(tsofimDetails.getSchool());
+            LOGGER.info(LoggerMessages.TSOFIM_DETAILS + LoggerMessages.WITH_UUID + tsofimDetails.getUuidChild() +
+                LoggerMessages.WAS_UPDATE +
+                ": new School " + tsofimDetails.getSchool());
+        }
+        if(!tsofimDetails.getChildClass().isEmpty()){
+            tsofimDetailsEntity.setChildClass(tsofimDetails.getChildClass());
+            LOGGER.info(LoggerMessages.TSOFIM_DETAILS + LoggerMessages.WITH_UUID + tsofimDetails.getUuidChild() +
+                LoggerMessages.WAS_UPDATE +
+                ": new School " + tsofimDetails.getChildClass());
+        }
+        tsofimDetailsRepo.save(tsofimDetailsEntity);
+        LOGGER.info(LoggerMessages.TSOFIM_DETAILS + LoggerMessages.WITH_UUID + tsofimDetails.getUuidChild() +
+            LoggerMessages.WAS_UPDATE );
+        return modelMapper.map(tsofimDetailsEntity, ResponseTsofimDetails.class);
     }
 }
