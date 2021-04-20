@@ -11,6 +11,7 @@ import smilyk.atsarat.tsofim.dto.ResponseTsofimDetails;
 import smilyk.atsarat.tsofim.dto.UpdateTsofimDetailDto;
 import smilyk.atsarat.tsofim.enums.RequestOperationName;
 import smilyk.atsarat.tsofim.enums.RequestOperationStatus;
+import smilyk.atsarat.tsofim.services.parser.TsofimCrawlerService;
 import smilyk.atsarat.tsofim.services.tsofim.TsofimDetailsService;
 import smilyk.atsarat.tsofim.services.validator.ValidatorService;
 
@@ -33,6 +34,8 @@ public class TsofimController {
     TsofimDetailsService tsofimDetailsService;
     @Autowired
     ValidatorService validatorService;
+    @Autowired
+    TsofimCrawlerService tsofimCrawlerService;
 
     @PostMapping()
     public Response createChildDetails(@Valid @RequestBody AddTsofimDetailsDto tsofimDetails) {
@@ -56,5 +59,10 @@ public class TsofimController {
                 HttpServletResponse.SC_NO_CONTENT, currentDate);
         }
         return new Response(responseChildDetails, HttpServletResponse.SC_FOUND, currentDate);
+    }
+
+    @GetMapping("/parse/{uuidChild}")
+    public String parseSchool(@PathVariable String uuidChild)  {
+        return tsofimCrawlerService.sendFormToTsofim(uuidChild);
     }
 }
