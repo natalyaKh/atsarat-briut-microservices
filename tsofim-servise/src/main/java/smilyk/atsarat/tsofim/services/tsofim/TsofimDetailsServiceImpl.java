@@ -88,4 +88,18 @@ public class TsofimDetailsServiceImpl implements TsofimDetailsService {
             LoggerMessages.WAS_UPDATE );
         return modelMapper.map(tsofimDetailsEntity, ResponseTsofimDetails.class);
     }
+
+    @Override
+    public ResponseTsofimDetails getChildDetailsByChildUuid(String uuidChild) {
+        Optional<TsofimDetails> optionalTsofimDetails = tsofimDetailsRepo.findByUuidChildAndDeleted(uuidChild,
+            false);
+        if(!optionalTsofimDetails.isPresent()){
+            LOGGER.info(LoggerMessages.TSOFIM_DETAILS + LoggerMessages.WITH_UUID + uuidChild +
+                LoggerMessages.NOT_FOUND);
+            return null;
+        }
+        return modelMapper.map(optionalTsofimDetails.get(), ResponseTsofimDetails.class);
+    }
+
+
 }

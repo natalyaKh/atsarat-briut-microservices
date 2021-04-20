@@ -48,4 +48,13 @@ public class TsofimController {
         }
         return new Response(updateChildDetails, HttpServletResponse.SC_FOUND, currentDate);
     }
+    @GetMapping(path = "child/{uuidChild}")
+    public Response getChildDetailsByChildUuid(@PathVariable String uuidChild) {
+        ResponseTsofimDetails responseChildDetails = tsofimDetailsService.getChildDetailsByChildUuid(uuidChild);
+        if(responseChildDetails == null){
+            return new Response(NOT_FOUND_STRING + uuidChild,
+                HttpServletResponse.SC_NO_CONTENT, currentDate);
+        }
+        return new Response(responseChildDetails, HttpServletResponse.SC_FOUND, currentDate);
+    }
 }
