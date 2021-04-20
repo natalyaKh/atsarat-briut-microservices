@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import smilyk.atsarat.tsofim.dto.AddTsofimDetailsDto;
 import smilyk.atsarat.tsofim.dto.Response;
+import smilyk.atsarat.tsofim.dto.ResponseTsofimDetails;
+import smilyk.atsarat.tsofim.dto.UpdateTsofimDetailDto;
 import smilyk.atsarat.tsofim.enums.RequestOperationName;
 import smilyk.atsarat.tsofim.enums.RequestOperationStatus;
 import smilyk.atsarat.tsofim.services.tsofim.TsofimDetailsService;
@@ -36,5 +38,14 @@ public class TsofimController {
     public Response createChildDetails(@Valid @RequestBody AddTsofimDetailsDto tsofimDetails) {
         validatorService.checkChildUuidUnique(tsofimDetails.getUuidChild());
         return tsofimDetailsService.addTsofimDetails(tsofimDetails);
+    }
+    @PutMapping()
+    public Response updateChildDetails(@Valid @RequestBody UpdateTsofimDetailDto tsofimDetails) {
+        ResponseTsofimDetails updateChildDetails = tsofimDetailsService.updateTsofimDetails(tsofimDetails);
+        if(updateChildDetails == null){
+            return new Response(NOT_FOUND_STRING + tsofimDetails.getUuidChild(),
+                HttpServletResponse.SC_NO_CONTENT, currentDate);
+        }
+        return new Response(updateChildDetails, HttpServletResponse.SC_FOUND, currentDate);
     }
 }
