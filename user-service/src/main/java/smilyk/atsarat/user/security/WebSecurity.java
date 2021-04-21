@@ -30,27 +30,29 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        /**добавляет cors*/
-                .cors()
-                .and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
-                .permitAll()
-                /**проверка e-mail - разрешена всем**/
-                .antMatchers(HttpMethod.GET, SecurityConstants.VERIFICATION_EMAIL_URL)
-                .permitAll()
-                /**изменение пароля - доступно всем**/
-                .antMatchers(HttpMethod.POST, SecurityConstants.PASSWORD_RESET_REQUEST_URL)
-                .permitAll()
-                .anyRequest().authenticated()
-                .and()
-                /**
-                 * фильтр для всех обьектов, которые проходят через процедуру аутентификации
-                 */
-                .addFilter(getAuthenticationFilter())
-                /**
-                 * только тот, кто вошел в пприложение, может менять что то в нем
-                 */
-                .addFilter(new AuthorizationFilter(authenticationManager()));
+            /**добавляет cors*/
+            .cors()
+            .and().csrf().disable().authorizeRequests()
+            .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
+            .permitAll()
+            /**проверка e-mail - разрешена всем**/
+            .antMatchers(HttpMethod.GET, SecurityConstants.VERIFICATION_EMAIL_URL)
+            .permitAll()
+            /**изменение пароля - доступно всем**/
+            .antMatchers(HttpMethod.POST, SecurityConstants.PASSWORD_RESET_REQUEST_URL)
+            .permitAll()
+            .antMatchers("/monitor/health").permitAll()
+            .antMatchers("/monitor/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            /**
+             * фильтр для всех обьектов, которые проходят через процедуру аутентификации
+             */
+            .addFilter(getAuthenticationFilter())
+            /**
+             * только тот, кто вошел в пприложение, может менять что то в нем
+             */
+            .addFilter(new AuthorizationFilter(authenticationManager()));
         /**
          * убираем кеширование токена
          */
@@ -69,6 +71,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         filter.setFilterProcessesUrl("/users/login");
         return filter;
     }
+
     /**
      * добавляет cors
      *
