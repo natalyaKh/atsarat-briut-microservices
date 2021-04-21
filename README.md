@@ -8,3 +8,7 @@ add rabbit MQ ->
 Login -> 
 
     -localhost:8080/users/login
+
+Swagger -> 
+
+    - http://localhost:8011/swagger-ui.html#!/

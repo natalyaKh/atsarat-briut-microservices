@@ -10,9 +10,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import smilyk.atsarat.user.security.AppProperties;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableSwagger2
 public class UserServiceApplication {
 
     public static void main(String[] args) {
