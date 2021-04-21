@@ -28,6 +28,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .antMatchers("/monitor/health").permitAll()
             .antMatchers("/monitor/**").permitAll()
+            .antMatchers("/v2/api-docs/**").permitAll()
+            .antMatchers("/swagger.json").permitAll()
+            .antMatchers("/swagger-ui.html").permitAll()
+            .antMatchers("/swagger-resources/**").permitAll()
+            .antMatchers("/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new AuthorizationFilter(authenticationManager(), environment));

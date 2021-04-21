@@ -43,6 +43,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .permitAll()
             .antMatchers("/monitor/health").permitAll()
             .antMatchers("/monitor/**").permitAll()
+            .antMatchers("/v2/api-docs/**").permitAll()
+            .antMatchers("/swagger.json").permitAll()
+            .antMatchers("/swagger-ui.html").permitAll()
+            .antMatchers("/swagger-resources/**").permitAll()
+            .antMatchers("/webjars/**").permitAll()
             .anyRequest().authenticated()
             .and()
             /**

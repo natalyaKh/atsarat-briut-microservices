@@ -1,7 +1,6 @@
 package smilyk.atsarat.user.constants;
 
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import smilyk.atsarat.user.SpringApplicationContext;
 import smilyk.atsarat.user.security.AppProperties;
@@ -10,7 +9,7 @@ import smilyk.atsarat.user.security.AppProperties;
 @Component
 public class SecurityConstants {
 
-    public static final String SIGN_UP_URL = "/users/v1/";
+    public static final String SIGN_UP_URL = "/users/v1";
 
     public static final String SIGN_UP_ADMIN_URL = "/users/v1/admin";
     public static final String VERIFICATION_EMAIL_URL = "/users/v1/email-verification/**";
