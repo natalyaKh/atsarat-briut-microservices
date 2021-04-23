@@ -18,10 +18,10 @@
         <java.version>11</java.version>
     </properties>
     <dependencies>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter</artifactId>-->
+<!--    </dependency>-->
     <!--		java e-mail starter-->
     <dependency>
         <groupId>org.springframework.boot</groupId>
