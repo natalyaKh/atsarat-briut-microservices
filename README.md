@@ -12,3 +12,9 @@ Login ->
 Swagger -> 
 
     - http://localhost:8011/swagger-ui.html#!/
+
+For creating image -> 
+
+    - maven clear
+    - maven package
+    - maven -> plugins-> docker plugin -> build
