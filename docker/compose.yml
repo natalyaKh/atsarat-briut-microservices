@@ -27,3 +27,12 @@ services:
       - "3333:3306"
     expose:
       - "3333"
+
+
+  eureka:
+    container_name: eureka
+    restart: always
+    image: smilyk/eureka:latest
+    ports:
+      - "8761:8761"
+
