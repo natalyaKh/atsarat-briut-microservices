@@ -3,6 +3,7 @@ services:
   rabbit:
     container_name: rabbit
     restart: always
+
     image: "rabbitmq:3-management"
     ports:
       - "15672:15672"
