@@ -2,12 +2,13 @@ version: '3.8'
 services:
   rabbit:
     container_name: rabbit
-    restart: always
-
     image: "rabbitmq:3-management"
+    hostname: rabbit
     ports:
       - "15672:15672"
       - "5672:5672"
+    restart: always
+
     environment:
       RABBITMQ_DEFAULT_USER: "user"
       RABBITMQ_DEFAULT_PASS: "password"
@@ -28,11 +29,23 @@ services:
     expose:
       - "3333"
 
-
   eureka:
     container_name: eureka
     restart: always
     image: smilyk/eureka:latest
     ports:
       - "8761:8761"
+
+  email:
+    container_name: email
+    image: smilyk/email:latest
+    ports:
+      - "8083:8083"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+    depends_on:
+      - rabbit
+    restart: always
+
 
