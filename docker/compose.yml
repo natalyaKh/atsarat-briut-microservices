@@ -2,6 +2,7 @@ version: '3.8'
 services:
   rabbit:
     container_name: rabbit
+    restart: always
     image: "rabbitmq:3-management"
     ports:
       - "15672:15672"
@@ -11,3 +12,17 @@ services:
       RABBITMQ_DEFAULT_PASS: "password"
     volumes:
       - "/var/lib/rabbitmq"
+
+  mysql:
+    container_name: mysql
+    image: 'mysql:5.7'
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: "root"
+      MYSQL_ROOT_PASSWORD: "r00t"
+      MYSQL_USER: "test"
+      MYSQL_PASSWORD: "test"
+    ports:
+      - "3333:3306"
+    expose:
+      - "3333"
