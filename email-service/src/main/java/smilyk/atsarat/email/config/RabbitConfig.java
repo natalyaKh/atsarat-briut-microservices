@@ -15,7 +15,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 //import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-
+//TODO
+// understans why dont create queue automatically
 @Configuration
 public class RabbitConfig {
     private static final String type = "direct";
