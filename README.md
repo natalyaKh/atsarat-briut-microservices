@@ -18,3 +18,12 @@ For creating image ->
     - maven clear
     - maven package
     - maven -> plugins-> docker plugin -> build
+
+Example for creating image and pushing to docker hub
+
+    - mvn clean
+    - mvn package
+    - docker build
+    - CLI -> 
+        - docker tag atsarat/eureka:latest smilyk/eureka:latest
+        - docker push smilyk/eureka:latest
