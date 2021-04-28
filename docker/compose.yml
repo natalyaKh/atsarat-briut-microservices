@@ -77,6 +77,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3333/a_b_users?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&createDatabaseIfNotExist=true
     depends_on:
       - rabbit
+      - eureka
       - email
       - mysql
 
@@ -94,6 +95,24 @@ services:
     depends_on:
       - rabbit
       - mysql
+      - eureka
+    restart: on-failure
+
+  scheduler:
+    container_name: scheduler
+    image: smilyk/sceduler-service
+    ports:
+      - "8084:8084"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      MYSQL_ROOT_USER: "root"
+      MYSQL_ROOT_PASSWORD: "r00t"
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3333/a_b_scheduler?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&createDatabaseIfNotExist=true
+    depends_on:
+      - rabbit
+      - mysql
+      - eureka
     restart: on-failure
 
 
