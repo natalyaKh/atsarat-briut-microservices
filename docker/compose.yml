@@ -49,4 +49,16 @@ services:
       - rabbit
     restart: always
 
+  gateway:
+    container_name: gateway
+    image: smilyk/zuul-service
+    ports:
+      - "8011:8011"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+    depends_on:
+      - email
+    restart: on-failure
+
 
