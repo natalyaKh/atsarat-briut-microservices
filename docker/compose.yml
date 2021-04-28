@@ -59,6 +59,25 @@ services:
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
     depends_on:
       - email
+      - users
+      - eureka
     restart: on-failure
+
+  users:
+    container_name: users
+    image: smilyk/users
+    ports:
+      - "8088:8088"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      MYSQL_ROOT_USER: "root"
+      MYSQL_ROOT_PASSWORD: "r00t"
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3333/a_b_users?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&createDatabaseIfNotExist=true
+    depends_on:
+      - rabbit
+      - email
+      - mysql
+
 
 
