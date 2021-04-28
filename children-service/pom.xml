@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>children-service</artifactId>
-
+<name>children</name>
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
@@ -24,8 +24,8 @@
         <jaxb.version>2.3.0</jaxb.version>
         <awaitility.version>3.1.6</awaitility.version>
 
-        <docker.image.prefix>atsarat</docker.image.prefix>
-        <docker.image.name>${project.artifactId}</docker.image.name>
+        <docker.image.prefix>smilyk</docker.image.prefix>
+        <docker.image.name>${project.name}</docker.image.name>
     </properties>
 
     <dependencies>
