@@ -12,7 +12,7 @@
     <artifactId>zuul-service</artifactId>
 
     <properties>
-    <docker.image.prefix>atsarat</docker.image.prefix>
+    <docker.image.prefix>smilyk</docker.image.prefix>
     <docker.image.name>${project.artifactId}</docker.image.name>
     </properties>
     <dependencies>
