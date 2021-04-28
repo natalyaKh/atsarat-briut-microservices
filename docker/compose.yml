@@ -97,3 +97,7 @@ services:
 
 
 
+    restart: on-failure
+
+
+
