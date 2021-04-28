@@ -79,7 +79,6 @@ services:
       - rabbit
       - email
       - mysql
-   restart: on-failure
 
   children:
     container_name: children
