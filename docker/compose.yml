@@ -2,13 +2,12 @@ version: '3.8'
 services:
   rabbit:
     container_name: rabbit
-    image: "rabbitmq:3-management"
+    image: "smilyk/rabbit"
     hostname: rabbit
     ports:
       - "15672:15672"
       - "5672:5672"
     restart: always
-
     environment:
       RABBITMQ_DEFAULT_USER: "user"
       RABBITMQ_DEFAULT_PASS: "password"
@@ -41,6 +40,8 @@ services:
     image: smilyk/email:latest
     ports:
       - "8083:8083"
+    env_file:
+      - .env
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
