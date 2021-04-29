@@ -15,8 +15,8 @@
     <description>rabbitMq for project atsarat microservices</description>
     <properties>
         <java.version>11</java.version>
-        <docker.image.prefix>atsarat</docker.image.prefix>
-        <docker.image.name>${project.artifactId}</docker.image.name>
+        <docker.image.prefix>smilyk</docker.image.prefix>
+        <docker.image.name>${project.name}</docker.image.name>
     </properties>
     <dependencies>
         <dependency>
