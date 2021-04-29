@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>children-service</artifactId>
-<name>children</name>
+    <name>children</name>
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
@@ -131,22 +131,22 @@
     </dependencies>
     <build>
         <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <configuration>
-                        <layers>
-                            <enabled>true</enabled>
-                            <includeLayerTools>true</includeLayerTools>
-                        </layers>
-                    </configuration>
-                </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <layers>
+                        <enabled>true</enabled>
+                        <includeLayerTools>true</includeLayerTools>
+                    </layers>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.33.0</version>
                 <configuration>
-<!--                    <dockerHost>http://127.0.0.1:2375</dockerHost>-->
+                    <!--                    <dockerHost>http://127.0.0.1:2375</dockerHost>-->
                     <verbose>true</verbose>
                     <images>
                         <image>

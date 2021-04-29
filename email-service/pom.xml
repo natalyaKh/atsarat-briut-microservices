@@ -13,36 +13,36 @@
     <artifactId>email-service</artifactId>
 
     <description>email-service module for project atsarat-briut microservices</description>
-
+    <name>email</name>
 
     <properties>
         <java.version>11</java.version>
-        <docker.image.prefix>atsarat</docker.image.prefix>
-        <docker.image.name>${project.artifactId}</docker.image.name>
+        <docker.image.prefix>smilyk</docker.image.prefix>
+        <docker.image.name>${project.name}</docker.image.name>
     </properties>
     <dependencies>
-<!--    <dependency>-->
-<!--        <groupId>org.springframework.boot</groupId>-->
-<!--        <artifactId>spring-boot-starter</artifactId>-->
-<!--    </dependency>-->
-    <!--		java e-mail starter-->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-mail</artifactId>
-    </dependency>
-    <!--	end	java e-mail starter-->
-    <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.6</version>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-        <version>5.2.9.RELEASE</version>
-    </dependency>
+        <!--    <dependency>-->
+        <!--        <groupId>org.springframework.boot</groupId>-->
+        <!--        <artifactId>spring-boot-starter</artifactId>-->
+        <!--    </dependency>-->
+        <!--		java e-mail starter-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <!--	end	java e-mail starter-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.9.RELEASE</version>
+        </dependency>
 
-</dependencies>
+    </dependencies>
 
     <build>
         <plugins>

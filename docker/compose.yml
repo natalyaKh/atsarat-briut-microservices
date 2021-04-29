@@ -37,7 +37,7 @@ services:
 
   email:
     container_name: email
-    image: smilyk/email:latest
+    image: smilyk/email
     ports:
       - "8083:8083"
     env_file:
@@ -51,7 +51,7 @@ services:
 
   gateway:
     container_name: gateway
-    image: smilyk/zuul-service
+    image: smilyk/zuul
     ports:
       - "8011:8011"
     environment:
@@ -101,7 +101,7 @@ services:
 
   scheduler:
     container_name: scheduler
-    image: smilyk/sceduler-service
+    image: smilyk/sceduler
     ports:
       - "8084:8084"
     environment:
@@ -149,6 +149,7 @@ services:
 
   firefox:
     image: selenium/node-firefox
+    container_name: firefox
     depends_on:
       - selenium-hub
     environment:
