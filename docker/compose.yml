@@ -64,6 +64,7 @@ services:
       - eureka
     restart: on-failure
 
+
   users:
     container_name: users
     image: smilyk/users
@@ -114,6 +115,46 @@ services:
       - mysql
       - eureka
     restart: on-failure
+
+
+  tsofim:
+    container_name: tsofim
+    image: smilyk/tsofim
+    ports:
+      - "8086:8086"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      MYSQL_ROOT_USER: "root"
+      MYSQL_ROOT_PASSWORD: "r00t"
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3333/a_b_tsofim?useUnicode=true&characterEncoding=utf8_general_ci&serverTimezone=UTC&createDatabaseIfNotExist=true
+      MODULE: search-module.xml
+      BROWSER: firefox
+      SELENIUM_HUB: selenium-hub
+    depends_on:
+      - rabbit
+      - mysql
+      - eureka
+      - users
+      - children
+      - firefox
+    restart: on-failure
+
+
+  selenium-hub:
+    image: selenium/hub
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+
+  firefox:
+    image: selenium/node-firefox
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium-hub
+      - HUB_PORT_4444_TCP_PORT=4444
+
 
 
 
