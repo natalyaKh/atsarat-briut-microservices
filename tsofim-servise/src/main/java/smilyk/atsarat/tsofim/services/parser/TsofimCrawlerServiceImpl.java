@@ -7,6 +7,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -29,8 +31,11 @@ import smilyk.atsarat.tsofim.services.hystrix.user.respPerson.RespPersonHystrixD
 import smilyk.atsarat.tsofim.services.hystrix.user.respPerson.RespPersonServiceClient;
 import smilyk.atsarat.tsofim.services.rabbit.RabbitService;
 
+import javax.print.DocFlavor;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
@@ -59,7 +64,7 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
     @Autowired
     public TsofimCrawlerServiceImpl(ChildServiceClient childHystrix, UserServiceClient userHystrix,
                                     RespPersonServiceClient respPersonHystrix, TsofimDetailsRepo tsofimDetailsRepo,
-                                    RabbitService rabbitService) {
+                                    RabbitService rabbitService) throws IOException {
         this.childHystrix = childHystrix;
         this.userHystrix = userHystrix;
         this.respPersonHystrix = respPersonHystrix;
@@ -82,6 +87,7 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
     public String sendFormToTsofim(String uuidChild) {
         Response childFromHystrix = this.childHystrix.getChildByChildUuid(uuidChild, tokenPrefix + " " + adminToken);
         ChildHystrixDto child = modelMapper.map(childFromHystrix.getContent(), ChildHystrixDto.class);
+        LOGGER.info("get child");
         String childFirstNAme = child.getFirstName();
         String childSecondName = child.getSecondName();
         String childTZ = child.getTz();
@@ -93,6 +99,7 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
         String parentSecondName;
         String parentTZ;
         String email;
+
         if (respPersonUuid != null) {
             Response respPersonFromHystrix = respPersonHystrix.getResponsePersonByUserUuid(respPersonUuid,
                 tokenPrefix + " " + adminToken);
@@ -115,7 +122,7 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
                 email = parent.getAltEmail();
             }
         }
-
+        System.err.println("get parent");
         Optional<TsofimDetails> optionalTsofimDetails = tsofimDetailsRepo.findByUuidChildAndDeleted(
             uuidChild, false);
         if (!optionalTsofimDetails.isPresent()) {
@@ -123,21 +130,41 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
         }
         TsofimDetails tsofimDetails = optionalTsofimDetails.get();
 
-        WebDriver driver = getWebDriver();
+        String hubURL = "http://selenium-hub:4444/wd/hub";
+        DesiredCapabilities capability = DesiredCapabilities.firefox();
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(hubURL), capability);
+        } catch (MalformedURLException e) {
+            LOGGER.info(e.getMessage() + " driver falls");
+            e.printStackTrace();
+        }
+        driver.get("https://briut.robins.app/main");
+
+        System.err.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+//        driver.quit();
+//        WebDriver driver = getWebDriver();
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+        System.err.println("2+++++++++++++++++++++++++++++++++++++++++++++++++++");
+
         WebElement button1 = driver.findElement(By.xpath(
             "/html[1]/body[1]/div[1]/div[1]/div[2]/a[1]/button[1]"));
         WebDriverWait wait = new WebDriverWait(driver, 60); //here, wait time is 40 seconds
         wait.until(webDriver -> ExpectedConditions.visibilityOf(button1));
+        System.err.println("3+++++++++++++++++++++++++++++++++++++++++++++++++++");
+
         driver.findElement(By.xpath("//body/div[@id='root']/div[1]/div[2]/div[2]/input[1]")).sendKeys(
             childFirstNAme + " " + childSecondName
         );
+        System.err.println(" findElement");
         driver.findElement(By.xpath("//body/div[@id='root']/div[1]/div[2]/div[3]/input[1]")).sendKeys(
             childTZ
         );
         String place = tsofimDetails.getPlace().trim();
         WebElement choosePlace = driver.findElement(By.xpath("//body/div[@id='root']/div[1]/div[2]/div[4]"));
         choosePlace.click();
+        System.err.println("4+++++++++++++++++++++++++++++++++++++++++++++++++++");
+
         List<WebElement> listChoosePlace = driver.findElements(By.xpath("//body/div[@id='root']/div[1]/div[2]/div[4]/ul/li"));
         for (WebElement chooseElement : listChoosePlace) {
             if (place.equals(chooseElement.getText())) {
@@ -145,6 +172,7 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
                 break;
             }
         }
+        LOGGER.info("add place");
 
         String group = tsofimDetails.getGroupTs().trim();
         WebElement groupElement = driver.findElement(By.xpath("//body/div[@id='root']/div[1]/div[2]/div[5]"));
@@ -156,7 +184,7 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
                 break;
             }
         }
-
+        LOGGER.info("add group");
         String classChild = tsofimDetails.getChildClass().trim();
         WebElement classChildElement = driver.findElement(By.xpath("//body/div[@id='root']/div[1]/div[2]/div[6]"));
         classChildElement.click();
@@ -167,12 +195,13 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
                 break;
             }
         }
+        System.err.println("5+++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         String school = tsofimDetails.getSchool().trim();
         driver.findElement(By.xpath("//body/div[@id='root']/div[1]/div[2]/div[7]/input[1]")).sendKeys(school);
 
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[8]/button[1]")).click();
-
+        LOGGER.info("add school");
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/label[1]/input[1]")).click();
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[3]/input[1]")).click();
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[5]/input[1]")).click();
@@ -189,11 +218,13 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
         driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]"));
         driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        LOGGER.info("create file ");
         try {
             FileUtils.copyFile(scrFile, new File("screenshot_tsofim.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        LOGGER.info("close file ");
         driver.quit();
         LOGGER.info(start + ": -> " + "parse tsofim page with url: " + tsofimUrl);
         String file = fileToBase64();
@@ -208,7 +239,9 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
             .build();
         rabbitService.sendToEmailService(emailDto);
         LOGGER.info("E-mail send to " + email + " { " + emailDto + " }");
+        driver.quit();
         return fileToBase64();
+//        return null;
     }
 
     private String fileToBase64() {
@@ -224,9 +257,38 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
         return encodeString;
     }
 
-    private WebDriver getWebDriver() {
-        WebDriver driver = new FirefoxDriver();
-        driver.get(tsofimUrl);
-        return driver;
-    }
+//    private String getWebDriver()  {
+////        DesiredCapabilities capabilities = new DesiredCapabilities();
+//////        capabilities.setPlatform(Platform.LINUX);//Grid воспринимает как linux
+////        capabilities.setBrowserName("firefox");
+//////        capabilities.setVersion("43");
+////        WebDriver driver = null;
+//        String hubURL = "http://selenium-hub:4444/wd/hub";
+//        DesiredCapabilities capability = DesiredCapabilities.firefox();
+////capability.setBrowserName("internet explorer");
+////capability.setPlatform("WINDOWS");
+////capability.setVersion("9.0.4");
+//        WebDriver driver = null;
+//        try {
+//            driver = new RemoteWebDriver(new URL(hubURL), capability);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        driver.get("http://www.google.com");
+//        WebElement element = driver.findElement(By.name("q"));
+//        element.sendKeys("Cheese!");
+//        System.err.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+//        System.err.println(" send email");
+//        element.submit();
+//        driver.quit();
+////        try {
+////            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"),
+////                capabilities);
+////        } catch (MalformedURLException e) {
+////            e.printStackTrace();
+////            System.err.println(e.getMessage());
+////        }
+////        driver.get(tsofimUrl);
+//        return "hi";
+//    }
 }
