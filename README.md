@@ -28,3 +28,7 @@ Example for creating image and pushing to docker hub
         - docker tag atsarat/eureka:latest smilyk/eureka:latest
         - docker push smilyk/eureka:latest
 
+сборка проекта ->  перейти в главную папку проекта 
+
+    - .../atsarat-briut-microservices %
+    - sh start.sh

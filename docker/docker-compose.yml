@@ -14,6 +14,12 @@ services:
     volumes:
       - "/var/lib/rabbitmq"
 
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411
+    hostname: zipkin
   mysql:
     container_name: mysql
     image: 'mysql:5.7'
@@ -27,6 +33,7 @@ services:
       - "3333:3306"
     expose:
       - "3333"
+
 
   eureka:
     container_name: eureka
@@ -101,7 +108,7 @@ services:
 
   scheduler:
     container_name: scheduler
-    image: smilyk/sceduler
+    image: smilyk/scheduler
     ports:
       - "8084:8084"
     environment:
@@ -127,7 +134,7 @@ services:
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
       MYSQL_ROOT_USER: "root"
       MYSQL_ROOT_PASSWORD: "r00t"
-      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3333/a_b_tsofim?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3333/a_b_tsofim?useUnicode=true&character-set-server=utf8mb4&collation-server=utf8mb4_unicode_ci&serverTimezone=UTC&createDatabaseIfNotExist=true
       MODULE: search-module.xml
       BROWSER: firefox
       SELENIUM_HUB: selenium-hub

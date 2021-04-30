@@ -46,3 +46,5 @@ docker push sirimalla/dockerhub:myfirstimagepush
 создать всех пользователей с указанными правами, и необходимые очереди.
 
 
+для mysql  что бы научить его принимать иврит
+https://stackoverflow.com/questions/46004648/how-to-setup-mysql-with-utf-8-using-docker-compose
