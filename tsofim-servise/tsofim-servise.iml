@@ -30,6 +30,30 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:1.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-sleuth-zipkin:2.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-sleuth-core:2.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.9.6" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-context-log4j2:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-messaging:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-rpc:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-spring-web:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-http:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-spring-rabbit:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-kafka-clients:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-kafka-streams:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-httpclient:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-httpasyncclient:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-spring-webmvc:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-servlet:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-jms:5.10.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-reporter-metrics-micrometer:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.zipkin2:zipkin:2.19.3" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-reporter:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-sender-kafka:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-sender-activemq-client:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-sender-amqp-client:2.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-java:3.141.59" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-api:3.141.59" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-chrome-driver:3.141.59" level="project" />
@@ -240,5 +264,23 @@
     <orderEntry type="library" name="Maven: com.thoughtworks.xstream:xstream:1.4.11.1" level="project" />
     <orderEntry type="library" name="Maven: xmlpull:xmlpull:1.1.3.1" level="project" />
     <orderEntry type="library" name="Maven: xpp3:xpp3_min:1.1.4c" level="project" />
+    <orderEntry type="library" name="Maven: de.codecentric:spring-boot-admin-starter-client:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: de.codecentric:spring-boot-admin-client:2.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jolokia:jolokia-core:1.6.2" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger2:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger:swagger-annotations:1.5.10" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger:swagger-models:1.5.10" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-spi:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-core:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-schema:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-common:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-web:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.6.1" level="project" />
   </component>
 </module>
