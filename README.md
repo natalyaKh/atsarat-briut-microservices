@@ -1,5 +1,5 @@
 # atsarat-briut-microservices
-
+Atsarat bruit filling at a atsarat-briut for “Tsofim” by link https://briut.robins.app/main
 
 <img width="501" alt="Снимок экрана 2021-05-02 в 13 38 50" src="https://user-images.githubusercontent.com/54761439/116810489-b48dfb00-ab4c-11eb-8fe1-9e439f737fdf.png">
 
@@ -10,6 +10,51 @@ This is a project with Microservices structure, that demonstrated Microservices 
 •	Docker
 •	RanbbitMQ
 
+
+# # FunctionServices:
+# User-service
+
+    implements the logic and validation for user registration. All information that concerns users (parent's name, surname, tz, email) is stored and processed in this service.
+    In addition, he is also responsible for registering the user.
+
+#Children-service 
+    
+    implements the logic that concerns the child (his school, class, tz, etc. information necessary to fill in the atsarat shave)
+
+    TZ in both services is encrypted using Base64
+
+# Scgeduler-service
+
+    a service that, according to a predetermined schedule (using Corn), checks whether the tofes needs to be filled (daily at 7:00 am).
+    
+    In addition, this service is responsible for removing information about users with an unconfirmed email address from the database (it is checked once a week). If the service detects that there is a need to fill in the tofes, it sends a message to the corresponding service, which contains the uuid of the child for whom it is necessary to compose a shave atsarat.
+    (implemented with RabbitMQ)
+
+
+#Tsofim-service
+
+    Сервис который отвечает  за заполнение документа. Получив messageот scheduler- service, the service "goes" sends a request to user-service to get data about the parent, and to children-service to get data about the child.
+    Messaging is implemented using hystrix to control failures and delays. If an error occurs during the call, the fallback method is used, which returns the default error message.
+    
+    After the service has collected all the necessary data from other services, it, using Selenium, fills in the tofes by entering the necessary data, and when everything is ready, it takes a screenshot of the screen.
+    A screen shot is sent to an e-mail along with the data necessary to send a confirmation letter to the child's parents.
+    (implemented with RabbitMQ)
+
+
+#Email-service
+
+    a service that sends messages to users. The service "listens" to messages from the user-service Tsofim-service gymnast-service school-service.
+    
+
+#Communication between microservices occurs both synchronously and asynchronously.
+
+
+#Each individual microservice is a Rest Back Server Back-service includes 2 levels:
+
+    1.	Controller. This is Spring Boot Rest Controller. Used for client - server communication. The controller consolidates all request processing by routing them through a single developer object.
+    2.	Service, which contains all the business logic of data processing. At the same level, there are the classes required for communication with the database. These classes are configured to implement the DAO pattern. These are the classes required to provide a CRUD interface for a single object. DAO - Spring Boot JPA Hibernate uses SQL database. The database was chosen because of its structure, which contains several separate independent entities.
+
+
 # # FunctionServices:
 Atsarat bruit filling at a atsarat-briut for “Tsofim” by link https://briut.robins.app/main
 
@@ -19,7 +64,7 @@ Note:
         -	In project use MySql 1.5
         -	Service-toservice communication – RestApi + RabbitMq messages
 
-Infrastructure-services:
+## Infrastructure-services:
 There is a bunch of common patterns in distributed system.
 
 #AUTHENTICATION
