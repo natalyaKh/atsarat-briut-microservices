@@ -1,5 +1,12 @@
 version: '3.8'
 services:
+  admin:
+    container_name: admin
+    image: "smilyk/admin"
+    hostname: admin
+    ports:
+      - "9999:9999"
+
   rabbit:
     container_name: rabbit
     image: "smilyk/rabbit"
@@ -77,6 +84,7 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      SPRING_BOOT_ADMIN_CLIENT_URL: "http://admin:9999"
     depends_on:
       - rabbit
     restart: always
@@ -92,6 +100,7 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      SPRING_BOOT_ADMIN_CLIENT_URL: "http://admin:9999"
     depends_on:
       - email
       - users
@@ -111,6 +120,7 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      SPRING_BOOT_ADMIN_CLIENT_URL: "http://admin:9999"
       MYSQL_ROOT_USER: "root"
       MYSQL_ROOT_PASSWORD: "r00t"
       SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3333/a_b_users?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&createDatabaseIfNotExist=true
@@ -129,6 +139,7 @@ services:
     ports:
       - "8082:8082"
     environment:
+      SPRING_BOOT_ADMIN_CLIENT_URL: "http://admin:9999"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
       MYSQL_ROOT_USER: "root"
@@ -149,6 +160,7 @@ services:
     ports:
       - "8084:8084"
     environment:
+      SPRING_BOOT_ADMIN_CLIENT_URL: "http://admin:9999"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
       MYSQL_ROOT_USER: "root"
@@ -170,6 +182,7 @@ services:
     ports:
       - "8086:8086"
     environment:
+      SPRING_BOOT_ADMIN_CLIENT_URL: "http://admin:9999"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://user:password@eureka:8761/eureka"
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
       MYSQL_ROOT_USER: "root"
