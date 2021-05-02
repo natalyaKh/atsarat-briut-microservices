@@ -1,7 +1,9 @@
 package smilyk.atsarat.sceduler.dto;
 
 import lombok.*;
-
+/**
+ * Operation Status info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

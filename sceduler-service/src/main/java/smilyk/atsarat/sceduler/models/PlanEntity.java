@@ -8,6 +8,9 @@ import java.io.Serializable;
 
 import java.time.LocalDateTime;
 
+/**
+ * Plan Entity
+ */
 @Entity
 @Table(name = "plan")
 public class PlanEntity implements Serializable{

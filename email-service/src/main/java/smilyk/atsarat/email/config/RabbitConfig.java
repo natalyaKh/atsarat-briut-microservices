@@ -16,8 +16,8 @@ import java.util.concurrent.TimeoutException;
 
 
 /**
- * Congiduration got RabbitMQ
- * creatinf queue and exchange for mail service
+ * Configuration got RabbitMQ
+ * creating queue and exchange for mail service
  */
 @Configuration
 public class RabbitConfig {
@@ -60,7 +60,7 @@ public class RabbitConfig {
     }
 
     /**
-     * creating congifuration for email queue
+     * creating configuration for email queue
      */
     @Bean
     public void createConfEmailQueue() {
@@ -78,7 +78,7 @@ public class RabbitConfig {
     }
 
     /**
-     * change messages for RabbitMQ to Json formst
+     * change messages for RabbitMQ to Json format
      */
     @Bean
     public MessageConverter jsonMessageConverter() {

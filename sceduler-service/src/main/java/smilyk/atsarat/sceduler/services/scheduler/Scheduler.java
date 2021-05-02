@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * checking if shuold send message for filling atsarat briut
+ */
 @Component
 @EnableScheduling
 public class Scheduler {
@@ -52,6 +55,9 @@ public class Scheduler {
         checkDayOfWeeks();
     }
 
+    /**
+     * checking details of getting {@link PlanEntity} by Week day
+     */
     private void checkDayOfWeeks() {
         LocalDateTime dateNow = LocalDateTime.now();
         LOGGER.info(dateNow + " check day of weeks");
@@ -165,6 +171,9 @@ public class Scheduler {
 
     }
 
+    /**
+     * checking details of getting {@link PlanEntity} by Week date
+     */
     private void checkDate() {
         LocalDateTime dateNow = LocalDateTime.now();
         LOGGER.info(dateNow + " check date" );

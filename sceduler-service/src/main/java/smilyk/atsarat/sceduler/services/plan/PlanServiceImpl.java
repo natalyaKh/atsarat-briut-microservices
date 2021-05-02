@@ -21,7 +21,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementation of {@link PlanService} interface.
+ */
 @Service
 public class PlanServiceImpl implements PlanService {
     ModelMapper modelMapper = new ModelMapper();

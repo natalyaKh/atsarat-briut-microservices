@@ -5,6 +5,9 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ * DTO for add plan info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -1,7 +1,9 @@
 package smilyk.atsarat.sceduler.dto;
 
 import lombok.*;
-
+/**
+ * Response for RabbitMQ  for sending messages to services
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -14,7 +14,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
-
+/**
+ * Configuration got RabbitMQ
+ * creating queue and exchange for scheduler service
+ */
 @Configuration
 public class RabbitProducerConfig {
     private static final String type = "direct";
@@ -31,7 +34,9 @@ public class RabbitProducerConfig {
     String tsofimRoutingkey;
 
 
-
+    /**
+     * creating email queue
+     */
     @Bean
     public void createQuene() {
         com.rabbitmq.client.ConnectionFactory factory = new com.rabbitmq.client.ConnectionFactory();
@@ -47,13 +52,17 @@ public class RabbitProducerConfig {
             e.printStackTrace();
         }
     }
-
+    /**
+     * creating exchange
+     */
     @Bean
     DirectExchange exchange() {
         String name = exchange;
         return new DirectExchange(name, true, false);
     }
-
+    /**
+     * change messages for RabbitMQ to Json format
+     */
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();

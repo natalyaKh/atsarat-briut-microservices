@@ -4,7 +4,9 @@ package smilyk.atsarat.sceduler.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
-
+/**
+ * Response plan DTO info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

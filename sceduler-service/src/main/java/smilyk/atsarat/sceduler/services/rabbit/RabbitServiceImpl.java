@@ -12,7 +12,9 @@ import smilyk.atsarat.sceduler.enums.Services;
 import smilyk.atsarat.sceduler.models.PlanEntity;
 
 import java.time.LocalDateTime;
-
+/**
+ * Implementation of {@link RabbitService} interface.
+ */
 @Service
 
 public class RabbitServiceImpl implements RabbitService {

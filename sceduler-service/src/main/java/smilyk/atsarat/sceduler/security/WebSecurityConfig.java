@@ -20,11 +20,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final Environment environment;
     @Value("${gateway.port}")
     String managementPort;
+
     /**
      * permitAll for zuul-gateway-service
      */
 //    private int managementPort = Integer.parseInt(environment.getProperty("gateway.port"));
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         int managerPortInt = Integer.parseInt(managementPort);
@@ -44,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        /**
-         * needs for autentication with spring boot admin
+        /** needs for autentication with spring boot admin
+         * monitor, swagger and all requests from getaway-service -> permit all
          */
         http.httpBasic();
         http.csrf().disable();
@@ -58,9 +58,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/swagger-ui.html").permitAll()
             .antMatchers("/swagger-resources/**").permitAll()
             .antMatchers("/webjars/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilter(new AuthorizationFilter(authenticationManager(), environment));
+            .anyRequest().authenticated()
+            .and()
+            .addFilter(new AuthorizationFilter(authenticationManager(), environment));
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

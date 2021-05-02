@@ -20,6 +20,9 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Controller for operation in plan of filing atsarat-briut
+ */
 @RestController
 @RequestMapping("/plan/v1")
 public class PlanController {
@@ -33,13 +36,24 @@ public class PlanController {
     PlanService planService;
 
 
+    /**
+     * method create {@link smilyk.atsarat.sceduler.models.PlanEntity}
+     * @param planDetails
+     * @return {@link Response} with {@link ResponsePlanDTO} object
+     */
 
     @PostMapping()
     public Response createPlanDetails(@Valid @RequestBody AddPlanDto planDetails) {
         return planService.addPlanDetails(planDetails);
     }
 
-
+    /**
+     * method get details of {@link smilyk.atsarat.sceduler.models.PlanEntity} by Uuid of child
+     * @param uuidChild of provided child
+     * @param page by default = 0
+     * @param  limit by defaulr = 10
+     * @return {@link Response} object with collection of {@link ResponsePlanDTO}
+     */
     @GetMapping(path = "plan/{uuidChild}")
     public Response getPlanDetailsByChildUuid(@RequestParam(value = "page", defaultValue = "0") int page,
                                               @RequestParam(value = "limit", defaultValue = "10") int limit,
@@ -55,6 +69,11 @@ public class PlanController {
         return new Response(responsePlanDTO, HttpServletResponse.SC_FOUND, currentDate);
     }
 
+    /**
+     * method returns collection of {@link smilyk.atsarat.sceduler.models.PlanEntity} for child with provided uuid
+     * @param uuidPlanDetails
+     * @return {@link Response} with {@link ResponsePlanDTO}
+     */
     @GetMapping(path = "/{uuidPlanDetails}")
     public Response getPlanDetailsByUuid(@PathVariable String uuidPlanDetails) {
         ResponsePlanDTO responsePlanDTO = planService.getPlanDetaildByUuid(uuidPlanDetails);
@@ -65,6 +84,11 @@ public class PlanController {
         return new Response(responsePlanDTO, HttpServletResponse.SC_FOUND, currentDate);
     }
 
+    /**
+     * make flag 'deleted' = true
+     * @param uuidCPlanDetails of provided {@link smilyk.atsarat.sceduler.models.PlanEntity}
+     * @return {@link RequestOperationStatus}
+     */
     @DeleteMapping(path = "/{uuidCPlanDetails}")
     public Response deletePlanDetails(@PathVariable String uuidCPlanDetails) {
         OperationStatusModel returnValue = new OperationStatusModel();
@@ -78,6 +102,11 @@ public class PlanController {
         return new Response(returnValue, HttpServletResponse.SC_OK, currentDate);
     }
 
+    /**
+     * @param page  by default = 0
+     * @param limit by default = 10
+     * @return {@link Response} with collection of all {@link ResponsePlanDTO}
+     */
     @GetMapping()
     public Response getAllPlanDetails(@RequestParam(value = "page", defaultValue = "0") int page,
                                       @RequestParam(value = "limit", defaultValue = "10") int limit) {
