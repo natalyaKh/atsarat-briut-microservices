@@ -15,7 +15,9 @@ import smilyk.atsarat.tsofim.dto.EmailDto;
 import smilyk.atsarat.tsofim.dto.RabbitDto;
 import smilyk.atsarat.tsofim.enums.LoggerMessages;
 import smilyk.atsarat.tsofim.services.parser.TsofimCrawlerService;
-
+/**
+ * Implementation of {@link RabbitService} interface.
+ */
 @Component
 @RefreshScope
 public class RabbitServiceImpl implements RabbitService {

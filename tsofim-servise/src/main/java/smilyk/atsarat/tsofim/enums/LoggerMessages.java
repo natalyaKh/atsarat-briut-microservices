@@ -1,8 +1,9 @@
 package smilyk.atsarat.tsofim.enums;
-
+/**
+ * Logger messages for Child Service
+ */
  public abstract class LoggerMessages {
 
-     /** user with e-mail {0} added to DB. */
      public static final String ADD_USER = "added to DB user with e-mail";
 
      public static final String USER_CONFIRM_EMAIL =  "user confirm his email. Email: ";

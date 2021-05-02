@@ -12,7 +12,9 @@ import smilyk.atsarat.tsofim.model.TsofimDetails;
 import smilyk.atsarat.tsofim.repo.TsofimDetailsRepo;
 
 import java.util.Optional;
-
+/**
+ * Implementation of {@link ValidatorService} interface.
+ */
 @Service
 public class ValidatorServiceImpl implements ValidatorService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ValidatorServiceImpl.class);

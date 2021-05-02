@@ -3,6 +3,9 @@ package smilyk.atsarat.tsofim.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Tsofim Details Entity
+ */
 @Entity
 @Table(name = "tsofimDetails")
 public class TsofimDetails implements Serializable {

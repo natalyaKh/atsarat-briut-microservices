@@ -1,7 +1,9 @@
 package smilyk.atsarat.tsofim.dto;
 
 import lombok.*;
-
+/**
+ * Response object
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

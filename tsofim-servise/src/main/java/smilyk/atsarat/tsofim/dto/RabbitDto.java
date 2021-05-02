@@ -1,7 +1,9 @@
 package smilyk.atsarat.tsofim.dto;
 
 import lombok.*;
-
+/**
+ * DTO for rabbit
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

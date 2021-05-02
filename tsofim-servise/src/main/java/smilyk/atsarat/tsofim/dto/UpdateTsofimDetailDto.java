@@ -1,7 +1,9 @@
 package smilyk.atsarat.tsofim.dto;
 
 import lombok.*;
-
+/**
+ * DTO for update tsofim details
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

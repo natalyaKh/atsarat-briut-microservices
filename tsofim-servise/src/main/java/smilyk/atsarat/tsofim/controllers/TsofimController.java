@@ -9,8 +9,6 @@ import smilyk.atsarat.tsofim.dto.AddTsofimDetailsDto;
 import smilyk.atsarat.tsofim.dto.Response;
 import smilyk.atsarat.tsofim.dto.ResponseTsofimDetails;
 import smilyk.atsarat.tsofim.dto.UpdateTsofimDetailDto;
-import smilyk.atsarat.tsofim.enums.RequestOperationName;
-import smilyk.atsarat.tsofim.enums.RequestOperationStatus;
 import smilyk.atsarat.tsofim.services.parser.TsofimCrawlerService;
 import smilyk.atsarat.tsofim.services.tsofim.TsofimDetailsService;
 import smilyk.atsarat.tsofim.services.validator.ValidatorService;

@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * DTO for add tsofim details
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

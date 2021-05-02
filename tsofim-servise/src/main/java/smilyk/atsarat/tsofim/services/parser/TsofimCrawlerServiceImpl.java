@@ -42,6 +42,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class fill atsarat-briut by link https://briut.robins.app/main and send screen-short to email-service
+ */
 @Service
 @RefreshScope
 public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
@@ -83,6 +86,11 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
     String TOKEN = tokenPrefix + " " + adminToken;
 
 
+    /**
+     * fills on document on site
+     * @param uuidChild
+     * @return
+     */
     @Override
     public String sendFormToTsofim(String uuidChild) {
         Response childFromHystrix = this.childHystrix.getChildByChildUuid(uuidChild, tokenPrefix + " " + adminToken);
@@ -244,6 +252,9 @@ public class TsofimCrawlerServiceImpl implements TsofimCrawlerService {
 //        return null;
     }
 
+    /**
+     * @return encode screen-shot to {@link Base64} base64 array
+     */
     private String fileToBase64() {
         String encodeString = "";
         try {

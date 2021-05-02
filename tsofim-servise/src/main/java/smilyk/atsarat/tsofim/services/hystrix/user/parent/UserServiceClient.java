@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import smilyk.atsarat.tsofim.dto.Response;
-
+/**
+ * Interface for operation with Hystrix
+ */
 @FeignClient(name = "user-service", fallbackFactory = UserFallbackFactory.class)
 public interface UserServiceClient {
     @GetMapping("/users/v1/{uuidUser}")

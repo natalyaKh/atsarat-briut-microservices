@@ -12,6 +12,7 @@
     <artifactId>tsofim-servise</artifactId>
     <name>tsofim</name>
     <properties>
+        <java.version>11</java.version>
         <docker.image.prefix>smilyk</docker.image.prefix>
         <docker.image.name>${project.name}</docker.image.name>
     </properties>

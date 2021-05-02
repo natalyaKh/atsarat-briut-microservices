@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import smilyk.atsarat.tsofim.dto.Response;
 
+/**
+ * Interface for operation with Hystrix
+ */
 @FeignClient(name = "children-service", fallbackFactory = ChildFallbackFactory.class)
 public interface ChildServiceClient {
     @GetMapping("/child/v1/{uuidChild}")

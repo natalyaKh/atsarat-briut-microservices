@@ -7,9 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import smilyk.atsarat.tsofim.dto.AddTsofimDetailsDto;
 import smilyk.atsarat.tsofim.dto.Response;
@@ -22,10 +19,11 @@ import smilyk.atsarat.tsofim.utils.UserUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of {@link TsofimDetailsService} interface.
+ */
 @Service
 @RefreshScope
 public class TsofimDetailsServiceImpl implements TsofimDetailsService {

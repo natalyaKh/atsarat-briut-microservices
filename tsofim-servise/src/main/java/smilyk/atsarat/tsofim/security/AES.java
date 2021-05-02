@@ -10,6 +10,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
 
+/**
+ * Config for encrypt
+ */
 @Service
 public class AES {
     private static SecretKeySpec secretKey;
