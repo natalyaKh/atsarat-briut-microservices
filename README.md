@@ -1,4 +1,8 @@
 # atsarat-briut-microservices
+
+[![CircleCI](https://circleci.com/gh/natalyaKh/atsarat-briut-microservices.svg?style=svg)](https://circleci.com/gh/natalyaKh/atsarat-briut-microservices)
+
+
 Atsarat bruit filling at a atsarat-briut for “Tsofim” by link https://briut.robins.app/main
 
 <img width="501" alt="Снимок экрана 2021-05-02 в 13 38 50" src="https://user-images.githubusercontent.com/54761439/116810489-b48dfb00-ab4c-11eb-8fe1-9e439f737fdf.png">
