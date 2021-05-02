@@ -1,7 +1,7 @@
 # atsarat-briut-microservices
 
 [![CircleCI](https://circleci.com/gh/natalyaKh/atsarat-briut-microservices.svg?style=svg)](https://circleci.com/gh/natalyaKh/atsarat-briut-microservices)
-
+![Docker Automated build](https://img.shields.io/docker/automated/smilyk/tsofim)
 
 Atsarat bruit filling at a atsarat-briut for “Tsofim” by link https://briut.robins.app/main
 
