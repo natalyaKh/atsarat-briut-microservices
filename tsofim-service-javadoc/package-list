@@ -1,0 +1,17 @@
+smilyk.atsarat.tsofim
+smilyk.atsarat.tsofim.configuration
+smilyk.atsarat.tsofim.controllers
+smilyk.atsarat.tsofim.dto
+smilyk.atsarat.tsofim.enums
+smilyk.atsarat.tsofim.exception
+smilyk.atsarat.tsofim.model
+smilyk.atsarat.tsofim.repo
+smilyk.atsarat.tsofim.security
+smilyk.atsarat.tsofim.services.hystrix.child
+smilyk.atsarat.tsofim.services.hystrix.user.parent
+smilyk.atsarat.tsofim.services.hystrix.user.respPerson
+smilyk.atsarat.tsofim.services.parser
+smilyk.atsarat.tsofim.services.rabbit
+smilyk.atsarat.tsofim.services.tsofim
+smilyk.atsarat.tsofim.services.validator
+smilyk.atsarat.tsofim.utils

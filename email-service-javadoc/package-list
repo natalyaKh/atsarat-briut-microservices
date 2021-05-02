@@ -1,0 +1,7 @@
+smilyk.atsarat.email
+smilyk.atsarat.email.config
+smilyk.atsarat.email.controller
+smilyk.atsarat.email.dto
+smilyk.atsarat.email.enums
+smilyk.atsarat.email.services.emailServices
+smilyk.atsarat.email.services.rabbitService

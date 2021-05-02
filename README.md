@@ -32,3 +32,11 @@ Example for creating image and pushing to docker hub
 
     - .../atsarat-briut-microservices %
     - sh start.sh
+
+javadoc
+
+    - http://localhost:63342/atsarat-briut-microservices/children-service-javadoc/index.html
+    - http://localhost:63342/atsarat-briut-microservices/email-service-javadoc/index.html
+    - http://localhost:63342/atsarat-briut-microservices/tsofim-service-javadoc/index.html
+    - http://localhost:63342/atsarat-briut-microservices/scheduler-service-javadoc/index.html
+    - http://localhost:63342/atsarat-briut-microservices/user-service-javadoc/index.html
