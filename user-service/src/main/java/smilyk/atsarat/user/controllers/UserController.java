@@ -34,7 +34,6 @@ public class UserController {
 
     /**
      * create {@link smilyk.atsarat.user.models.Users} user and save it to DB
-     *
      * @param userDetails
      * @return
      * @throws Exception

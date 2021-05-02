@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * благодаря этому классу у UsersServiceImpl есть доступ к CONTEXT
+ *  becouse of this class UsersServiceImpl got access to CONTEXT
  */
 public class SpringApplicationContext implements ApplicationContextAware {
 	private static ApplicationContext CONTEXT;

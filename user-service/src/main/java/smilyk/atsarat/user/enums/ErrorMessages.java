@@ -1,5 +1,7 @@
 package smilyk.atsarat.user.enums;
-
+/**
+ * Errors messages for User Service
+ */
 public enum ErrorMessages {
 
     MISSING_REQUIRED_FIELD("Missing required field. Please check documentation for required fields"),

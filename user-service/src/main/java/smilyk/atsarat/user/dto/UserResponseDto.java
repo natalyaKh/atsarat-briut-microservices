@@ -2,6 +2,9 @@ package smilyk.atsarat.user.dto;
 
 import lombok.*;
 
+/**
+ * Dto for User Response object
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -6,6 +6,9 @@ import smilyk.atsarat.user.SpringApplicationContext;
 import smilyk.atsarat.user.security.AppProperties;
 
 
+/**
+ * Constants for security of {@link smilyk.atsarat.user.controllers.UserController}
+ */
 @Component
 public class SecurityConstants {
 
@@ -21,6 +24,9 @@ public class SecurityConstants {
     public static final String HEADER_STRING = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
 
+    /**
+     * @return tokenSecret from application. properties file
+     */
     public static String getTokenSecret() {
         AppProperties appProperties = (AppProperties) SpringApplicationContext.getBean("AppProperties");
         return appProperties.getTokenSecret();

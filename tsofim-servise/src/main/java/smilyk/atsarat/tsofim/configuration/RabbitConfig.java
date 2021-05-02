@@ -15,8 +15,9 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-//import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-
+/**
+ * Rabbit configuration
+ */
 @Configuration
 @RefreshScope
 public class RabbitConfig {

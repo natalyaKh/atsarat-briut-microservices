@@ -50,17 +50,17 @@ public class WebSecurityCofig extends WebSecurityConfigurerAdapter {
          */
 //        http.httpBasic();
         http
-            /**добавляет cors*/
+            /**adding cors*/
             .cors()
             .and().csrf().disable();
         http
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
             .permitAll()
-            /**проверка e-mail - разрешена всем**/
+            /**check e-mail - permittAll**/
             .antMatchers(HttpMethod.GET, SecurityConstants.VERIFICATION_EMAIL_URL)
             .permitAll()
-            /**изменение пароля - доступно всем**/
+            /**changePassword - доступно всем**/
             .antMatchers(HttpMethod.POST, SecurityConstants.PASSWORD_RESET_REQUEST_URL)
             .permitAll()
             .antMatchers("/monitor/health").permitAll()
@@ -72,15 +72,16 @@ public class WebSecurityCofig extends WebSecurityConfigurerAdapter {
             .antMatchers("/webjars/**").permitAll()
             .and()
             /**
-             * фильтр для всех обьектов, которые проходят через процедуру аутентификации
+             * filter for all object with authenticated
+
              */
             .addFilter(getAuthenticationFilter())
             /**
-             * только тот, кто вошел в пприложение, может менять что то в нем
+             * only authonticated user can do something in app
              */
             .addFilter(new AuthorizationFilter(authenticationManager()));
         /**
-         * убираем кеширование токена
+         * delete cash of token
          */
         http.headers().frameOptions().disable();
     }
@@ -91,7 +92,7 @@ public class WebSecurityCofig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * логин пользователя теперь по ссылке .../users/login
+     * login user now by link .../users/login
      */
     protected AuthenticationFilter getAuthenticationFilter() throws Exception {
         final AuthenticationFilter filter = new AuthenticationFilter(authenticationManager());
@@ -100,9 +101,7 @@ public class WebSecurityCofig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * добавляет cors
-     *
-     * @return
+     * add cors
      */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

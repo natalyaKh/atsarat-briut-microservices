@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-
+/**
+ * DTO for update user info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

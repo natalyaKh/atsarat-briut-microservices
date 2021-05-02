@@ -21,6 +21,9 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Controller for Tsofim-service
+ */
 @RestController
 @RequestMapping("/tsofiml/v1")
 public class TsofimController {
@@ -36,6 +39,7 @@ public class TsofimController {
     ValidatorService validatorService;
     @Autowired
     TsofimCrawlerService tsofimCrawlerService;
+
 
     @PostMapping()
     public Response createChildDetails(@Valid @RequestBody AddTsofimDetailsDto tsofimDetails) {

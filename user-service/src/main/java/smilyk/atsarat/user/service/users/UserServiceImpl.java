@@ -34,7 +34,9 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Implementation of {@link UserService} interface.
+ */
 @Service
 @ComponentScan("smilyk.atsarat")
 public class UserServiceImpl implements UserService {

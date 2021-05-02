@@ -1,5 +1,6 @@
 package smilyk.atsarat.user.models;
 
+
 public class UserLoginRequestModel {
     private String password;
     private String mainEmail;

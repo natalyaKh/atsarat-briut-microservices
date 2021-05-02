@@ -10,7 +10,9 @@ import smilyk.atsarat.user.constants.SecurityConstants;
 
 import java.util.Date;
 import java.util.UUID;
-
+/**
+ * Generation
+ */
 @Service
 public class UserUtils {
 
@@ -19,7 +21,7 @@ public class UserUtils {
     }
 
     /**
-     * Создание  emailVerificationToken
+     * generating  emailVerificationToken
      **/
     public String generateEmailVerificationToken(String userId) {
         String token = Jwts.builder()
@@ -32,7 +34,7 @@ public class UserUtils {
     }
 
     /**
-     * проверка  срока действительности токена
+     * checking of token`s validation
      **/
     public static boolean hasTokenExpired(String token) {
         boolean rez = false;
@@ -47,8 +49,9 @@ public class UserUtils {
         }
         return rez;
     }
-
-    /**   Создание токена для изменения пароляю. Отличается от generateEmailVerificationToken срокос действия (1 день)**/
+/**
+ * Creating token for changing password. Time of validation of token is 1 day
+ */
     public String generatePasswordResetToken(String userId)
     {
         String token = Jwts.builder()
@@ -59,15 +62,15 @@ public class UserUtils {
         return token;
     }
 
-    /**   Создание токена для супер админа. Отличается от generateEmailVerificationToken срокос действия (1 день)**/
-    public String generateSuperAdminToken(String userId)
-    {
-        String token = Jwts.builder()
-                .setSubject(userId)
-                .signWith(SignatureAlgorithm.HS512, SecurityConstants.getTokenSecret())
-                .compact();
-        return token;
-    }
+//    /**   Создание токена для супер админа. Отличается от generateEmailVerificationToken срокос действия (1 день)**/
+//    public String generateSuperAdminToken(String userId)
+//    {
+//        String token = Jwts.builder()
+//                .setSubject(userId)
+//                .signWith(SignatureAlgorithm.HS512, SecurityConstants.getTokenSecret())
+//                .compact();
+//        return token;
+//    }
 
 }
 

@@ -1,7 +1,9 @@
 package smilyk.atsarat.user.dto;
 
 import lombok.*;
-
+/**
+ * Operation Status info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

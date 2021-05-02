@@ -1,6 +1,10 @@
 package smilyk.atsarat.user.dto;
 import lombok.*;
 
+/**
+ * /**
+ *  * DTO for user info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
