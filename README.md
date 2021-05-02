@@ -21,29 +21,37 @@ There is a bunch of common patterns in distributed system.
 
 #AUTHENTICATION
 
+
     Using JWT security. Registration of user and login are in User-service. But authentication and authorization implement in gateway-service.
 
 #API-GATEWAY
+
     It is a single entry point into the system, used to handle requests by routing them to the appropriate backend service or by invoking multiple backend services and aggregating the results. Also, it can be used for authentication, insights, stress and canary testing, service migration, static response handling, active traffic management.
     In project uses tool of Netflix – Zuul.
     requests from api-gateway are not checked by authentication. All services in structure getting requests from port of zuul-service as permitAll()
 
 #SERVICE-DISCOVERY
+
     Service discovery allows automatic detection of network locations for service instances, which could have dynamically assigned addresses because of auto-scaling, failures and upgrades.
     The key part of Service discovery is Registry. using Netflix Eureka in this project. Eureka is a good example of the client-side discovery pattern, when client is responsible for determining locations of available service instances (using Registry server) and load balancing requests across them.
 
 #RIBBON
+
     Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients. Compared to a traditional load balancer, there is no need in additional hop for every over-the-wire invocation - you can contact desired service directly.
     Out of the box, it natively integrates with Spring Cloud and Service Discovery. Eureka Client provides a dynamic list of available servers so Ribbon could balance between them.
 #HYSTRIX
+
     Hystrix is the implementation of Circuit Breaker pattern, which gives a control over latency and failure from dependencies accessed over the network. The main idea is to stop cascading failures in a distributed environment with a large number of microservices. That helps to fail fast and recover as soon as possible - important aspects of fault-tolerant systems that self-heal.
     Besides circuit breaker control, with Hystrix you can add a fallback method that will be called to obtain a default value in case the main command fails.
     Moreover, Hystrix generates metrics on execution outcomes and latency for each command, that we can use to monitor system behavior.
 #MONITORING
+
     In this project monitoring realized with admin-service, which collects all metrics from services.
 #LOG ANALYTICS
+
     Centralized logging can be very useful when attempting to identify problems in a distributed environment. Elasticsearch, Logstash and Filebeat  stack lets you search and analyze your logs, utilization and network activity data with ease.
 #DISTRIBUTED TRACING
+
     Distributed tracing implemented with Spring Cloud Sleuth and Zipkin.
 
 
