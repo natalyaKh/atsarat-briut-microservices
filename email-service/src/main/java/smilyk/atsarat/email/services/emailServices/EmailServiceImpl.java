@@ -18,7 +18,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
 import java.util.Base64;
-
+/**
+ * Implementation of {@link EmailService} interface.
+ */
 @Service
 
 public class EmailServiceImpl implements EmailService {

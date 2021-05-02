@@ -6,6 +6,9 @@ package smilyk.atsarat.email.dto;
 import lombok.*;
 import smilyk.atsarat.email.enums.Services;
 
+/**
+ * DTO for email Object
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

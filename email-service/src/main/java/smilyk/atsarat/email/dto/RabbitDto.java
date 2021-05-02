@@ -1,7 +1,9 @@
 package smilyk.atsarat.email.dto;
 
 import lombok.*;
-
+/**
+ * message DTO Object for RabbitMQ
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

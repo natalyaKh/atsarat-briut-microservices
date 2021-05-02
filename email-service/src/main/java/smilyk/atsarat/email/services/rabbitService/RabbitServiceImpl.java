@@ -9,7 +9,7 @@ import smilyk.atsarat.email.dto.EmailDto;
 import smilyk.atsarat.email.dto.EmailVerificationDto;
 import smilyk.atsarat.email.enums.Services;
 import smilyk.atsarat.email.services.emailServices.EmailService;
-
+@Deprecated
 @Service
 public class RabbitServiceImpl implements RabbitService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitServiceImpl.class);

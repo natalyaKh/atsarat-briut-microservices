@@ -1,7 +1,9 @@
 package smilyk.atsarat.email.dto;
 
 import lombok.*;
-
+/**
+ * DTO for email  verification Object
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -14,9 +14,11 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-//import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-//TODO
-// understans why dont create queue automatically
+
+/**
+ * Congiduration got RabbitMQ
+ * creatinf queue and exchange for mail service
+ */
 @Configuration
 public class RabbitConfig {
     private static final String type = "direct";
@@ -39,7 +41,9 @@ public class RabbitConfig {
     String confEmailRoutingkey;
 
 
-
+    /**
+     * creating email queue
+     */
     @Bean
     public void createEmailQueue() {
         ConnectionFactory factory = new ConnectionFactory();
@@ -55,6 +59,9 @@ public class RabbitConfig {
         }
     }
 
+    /**
+     * creating congifuration for email queue
+     */
     @Bean
     public void createConfEmailQueue() {
         ConnectionFactory factory = new ConnectionFactory();
@@ -70,6 +77,9 @@ public class RabbitConfig {
         }
     }
 
+    /**
+     * change messages for RabbitMQ to Json formst
+     */
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();

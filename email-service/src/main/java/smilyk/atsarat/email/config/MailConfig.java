@@ -10,6 +10,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 
+/**
+ * Configuration JavaMail of email service
+ */
 @Configuration
 public class MailConfig {
     @Autowired

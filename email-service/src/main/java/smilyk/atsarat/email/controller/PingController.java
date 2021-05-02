@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 
 
+/**
+ * Ping controller for email-service
+ */
 @RestController
 
 public class PingController {
