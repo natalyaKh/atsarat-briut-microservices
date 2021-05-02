@@ -11,7 +11,7 @@ This is a project with Microservices structure, that demonstrated Microservices 
 •	RanbbitMQ
 
 
-# # FunctionServices:
+# FunctionServices:
 # User-service
 
     implements the logic and validation for user registration. All information that concerns users (parent's name, surname, tz, email) is stored and processed in this service.
@@ -24,6 +24,7 @@ This is a project with Microservices structure, that demonstrated Microservices 
     TZ in both services is encrypted using Base64
 
 # Scgeduler-service
+![image](https://user-images.githubusercontent.com/54761439/116811047-ddfc5600-ab4f-11eb-94aa-c98000362363.png)
 
     a service that, according to a predetermined schedule (using Corn), checks whether the tofes needs to be filled (daily at 7:00 am).
     
@@ -40,6 +41,7 @@ This is a project with Microservices structure, that demonstrated Microservices 
     A screen shot is sent to an e-mail along with the data necessary to send a confirmation letter to the child's parents.
     (implemented with RabbitMQ)
 
+![image](https://user-images.githubusercontent.com/54761439/116811051-e6ed2780-ab4f-11eb-92f6-a33a5888fc20.png)
 
 # Email-service
 
@@ -64,6 +66,7 @@ Each individual microservice is a Rest Back Server Back-service includes 2 level
 There is a bunch of common patterns in distributed system.
 
 # AUTHENTICATION
+![image](https://user-images.githubusercontent.com/54761439/116811065-f4a2ad00-ab4f-11eb-8273-5fad201d9434.png)
 
 
     Using JWT security. Registration of user and login are in User-service. But authentication and authorization implement in gateway-service.
