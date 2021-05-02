@@ -5,8 +5,10 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/natalyaKh/atsarat-briut-microservices)
 ![GitHub repo size](https://img.shields.io/github/repo-size/natalyaKh/atsarat-briut-microservices)
 ![GitHub issues](https://img.shields.io/github/issues/natalyaKh/atsarat-briut-microservices)
-![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/natalyaKh/atsarat-briut-microservices)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/natalyaKh/atsarat-briut-microservices)
+
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg)](https://sonarcloud.io/dashboard?id=natalyaKh_atsarat-briut-microservices)
 
 Atsarat bruit filling at a atsarat-briut for “Tsofim” by link https://briut.robins.app/main
 
