@@ -12,6 +12,9 @@ import smilyk.atsarat.children.repo.ChildRepo;
 
 import java.util.Optional;
 
+/**
+ * Implementation of {@link ValidatorService} interface.
+ */
 @Service
 public class ValidatorServiceImpl implements ValidatorService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ValidatorServiceImpl.class);
@@ -23,6 +26,11 @@ public class ValidatorServiceImpl implements ValidatorService {
         this.childRepo = childRepo;
     }
 
+    /**
+     * method check if there is child with provided uuid in DB
+     * @param tz of checking {@link ChildrenEntity}
+     * @return boolean
+     */
     @Override
     public Boolean checkUniqueTZ(String tz) {
         Optional<ChildrenEntity> optionalChildrenEntity = childRepo.findByTzAndDeleted(

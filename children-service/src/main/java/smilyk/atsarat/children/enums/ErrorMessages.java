@@ -1,5 +1,8 @@
 package smilyk.atsarat.children.enums;
 
+/**
+ * Errors messages for Child Service
+ */
 public enum ErrorMessages {
 
     MISSING_REQUIRED_FIELD("Missing required field. Please check documentation for required fields"),

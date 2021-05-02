@@ -47,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         /**
          * needs for autentication with spring boot admin
+         * monitor, swagger and all requests from getaway-service -> permit all
          */
         http.httpBasic();
         /**добавляет cors*/

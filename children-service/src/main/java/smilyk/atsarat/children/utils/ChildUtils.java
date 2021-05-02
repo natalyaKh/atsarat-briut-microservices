@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+/**
+ * Generation of unic uuid for {@link smilyk.atsarat.children.model.ChildrenEntity}
+ */
 @Service
 public class ChildUtils {
 

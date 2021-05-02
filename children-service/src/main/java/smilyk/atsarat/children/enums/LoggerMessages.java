@@ -1,5 +1,8 @@
 package smilyk.atsarat.children.enums;
 
+/**
+ * Logger messages for Child Service
+ */
  public abstract class LoggerMessages {
 
      /** user with e-mail {0} added to DB. */

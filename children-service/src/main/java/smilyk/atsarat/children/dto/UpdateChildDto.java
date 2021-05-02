@@ -2,6 +2,9 @@ package smilyk.atsarat.children.dto;
 
 import lombok.*;
 
+/**
+ *  Update child DTO info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

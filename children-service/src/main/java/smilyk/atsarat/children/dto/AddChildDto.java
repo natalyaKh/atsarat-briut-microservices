@@ -5,6 +5,9 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO for add child info
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -14,6 +17,9 @@ import javax.validation.constraints.Size;
 public class AddChildDto {
 
 
+    /**
+     * The public first name of a user
+     */
     @NotNull(message = "first name can not be null")
     @Size(min = 2, max = 50)
     String firstName;

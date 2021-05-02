@@ -34,7 +34,8 @@ public class ChildController {
 
     /**
      * method create {@link smilyk.atsarat.children.model.ChildrenEntity}
-     * @param childDetails
+     * if child exists in DB return exception
+     * @return {@link smilyk.atsarat.children.model.ChildrenEntity} created
      */
     @PostMapping()
     public Response createChild(@Valid @RequestBody AddChildDto childDetails) {
@@ -43,6 +44,11 @@ public class ChildController {
     }
 
 
+    /**
+     * method update {@link smilyk.atsarat.children.model.ChildrenEntity}
+     * @param uuidChild, childDetails
+     * @return {@link smilyk.atsarat.children.model.ChildrenEntity} updated
+     */
     @PutMapping(path = "/{uuidChild}")
     public Response updateChild(@PathVariable String uuidChild,  @Valid @RequestBody UpdateChildDto childDetails) {
         UpdateChildDto updateChild = childService.updateChild(uuidChild, childDetails);
@@ -50,7 +56,8 @@ public class ChildController {
     }
 
     /**
-     * @param uuidChild
+     * method get {@link smilyk.atsarat.children.model.ChildrenEntity} by Uuid of child
+     * @param uuidChild of privoded {@link smilyk.atsarat.children.model.ChildrenEntity}
      * @return {@link ResponseChildDto}
      */
     @GetMapping(path = "/{uuidChild}")
@@ -61,7 +68,7 @@ public class ChildController {
 
     /**
      * make flag 'deleted' = true
-     * @param uuidChild
+     * @param uuidChild of provided {@link smilyk.atsarat.children.model.ChildrenEntity}
      * @return {@link RequestOperationStatus}
      */
     @DeleteMapping(path = "/{uuidChild}")
@@ -79,6 +86,7 @@ public class ChildController {
 
 
     /**
+     * method get list of {@link smilyk.atsarat.children.model.ChildrenEntity}
      * @param page, default = 0
      * @param limit, defaule = 2
      * @return list of {@link ResponseChildDto}

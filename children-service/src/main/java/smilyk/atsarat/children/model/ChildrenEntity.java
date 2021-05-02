@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 
+/**
+ * Children Entity
+ */
 @Entity
 @Table(name = "children")
 public class ChildrenEntity implements Serializable {

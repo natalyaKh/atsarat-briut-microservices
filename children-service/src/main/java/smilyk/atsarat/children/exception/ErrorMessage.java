@@ -2,6 +2,9 @@ package smilyk.atsarat.children.exception;
 
 import java.util.Date;
 
+/**
+ * Error message object
+ */
 public class ErrorMessage {
     private Date timestamp;
     private String message;

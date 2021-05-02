@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of {@link ChildService} interface.
+ */
 @Service
 public class ChildServiceImpl implements ChildService {
     private String currentDate = LocalDateTime.now().toLocalDate().toString();
@@ -38,6 +41,7 @@ public class ChildServiceImpl implements ChildService {
     ChildRepo childRepo;
     @Autowired
     ChildUtils utils;
+
 
     @Override
     public Response addChild(AddChildDto childDetails) {

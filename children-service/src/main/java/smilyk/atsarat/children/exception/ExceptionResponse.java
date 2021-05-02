@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Response od Exceptions
+ */
 public class ExceptionResponse {
 
     private final String errorCode;
